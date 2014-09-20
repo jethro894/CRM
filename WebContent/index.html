@@ -6,19 +6,18 @@
     </head>
 
     <body>
-        <div ng-app="" ng-controller="customersController">
-            <script src="namesController.js"></script>
+        <div ng-app="myApp" ng-controller="customersController">
             <table>
                 <tr ng-repeat="x in names | orderBy: 'Country' ">
                     <td>{{ x.Name }}</td>
                     <td>{{ x.Country }}</td>
                 </tr>
             </table>
-
         </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-
+        <script src="myApp.js"></script>
+        <script src="myController.js"></script>
     </body>
 
     <style>
