@@ -1,26 +1,31 @@
 /**
  * Created by jethro on 9/20/14.
  */
-app.controller("namesController", function($scope){
-    $scope.names = [
-        {name:'Jani',country:'Norway'},
-        {name:'Hege',country:'Sweden'},
-        {name:'Kai',country:'Denmark'}
-    ];
-});
+app.controller("myController", function($scope,$http){
+    $scope.agentID = "";
+    $scope.agentVerified = false;
+    $scope.error_message = "";
+    $scope.verify = function(agent_id){
+        ///verification
 
-app.controller("customersController", function($scope,$http){
-    $http.get("http://www.w3schools.com/website/Customers_JSON.php")
-        .success(function(response) {$scope.names = response;});
-});
 
-app.controller("searcherController", function($scope,$http){
+        $scope.agentID = agent_id;
+        $scope.agentVerified = true;
+        $scope.error_message = "no error";
+    };
+
+
+
+
+
     $scope.test = false;
     $scope.searchComplete = false;
     $scope.updateShow= false;
     $scope.userIDToBeUpdated = "";
     $scope.searchUser = function(user_id){
         $scope.userID = user_id;
+        ///unused! $scope.agentID = agent_id || 0;
+        ///$scope.agentID = (typeof agent_id === "undefined") ? "0" : agent_id;
         $http.get("http://www.w3schools.com/website/Customers_JSON.php")
             .success(function(response) {$scope.users = response;});
         $scope.searchComplete = true;
@@ -35,4 +40,12 @@ app.controller("searcherController", function($scope,$http){
         $scope.newCountry = attributes.Country;
         $scope.test = true;
     };
+
+    $scope.searcherReset = function(){
+        $scope.test = false;
+        $scope.searchComplete = false;
+        $scope.updateShow= false;
+        $scope.userIDToBeUpdated = "";
+    };
 });
+

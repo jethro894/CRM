@@ -8,59 +8,7 @@
 </head>
 
 <body>
-    <div ng-app="myApp" ng-controller="searcherController">
-        <p>Search ID: <input type="text" ng-model="id_to_search" placeholder="Enter User ID..."></p>
-        <p><button class="btn btn-success" ng-click="searchUser(id_to_search)">
-            <span class="glyphicon glyphicon-user"></span> Search User
-            </button></p>
-
-        <div ng-show="searchComplete">
-            <hr>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Edit</th>
-                    <th>Name</th>
-                    <th>Country</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="x in users">
-                    <td>
-                        <button class="btn" ng-click="updateWanted(x.Name)">
-                            <span class="glyphicon glyphicon-pencil"></span>  Update
-                        </button>
-                    </td>
-                    <td>{{ x.Name }}</td>
-                    <td>{{ x.Country }}</td>
-                </tr>
-                </tbody>
-            </table>
-            </hr>
-        </div>
-
-        <div ng-show="updateShow">
-            <hr>
-            <p>User ID: <input type="text" ng-model="userIDToBeUpdated" readonly></p>
-            <p>New Name: <input type="text" ng-model="new.Name" ></p>
-            <p>New Country: <input type="text" ng-model="new.Country" ></p>
-            <p><button class="btn btn-success" ng-click="updateUser(userIDToBeUpdated, new)">
-                <span class="glyphicon glyphicon-user"></span> Submit
-            </button></p>
-            </hr>
-        </div>
-
-        <div ng-show="test">
-            <li >
-                {{ userIDToBeUpdated }}
-            </li>
-            <li >
-                {{ newName }}
-            </li>
-            <li >
-                {{ newCountry }}
-            </li>
-        </div>
+    <div ng-app="myApp" ng-controller="myController" ng-include="'searcher.html'">
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
