@@ -16,15 +16,13 @@
             <p><button class="btn btn-success" ng-click="wannaSearch=true; wannaCreate=false; searcherReset()">
                 <span class="glyphicon glyphicon-user"></span> Search People
             </button>
-            <button class="btn btn-success" ng-click="wannaCreate=true; wannaSearch=false">
+            <button class="btn btn-success" ng-click="wannaCreate=true; wannaSearch=false; creatorReset()">
                 <span class="glyphicon glyphicon-user"></span> Create Record
             </button></p>
         </div>
         <div ng-show="wannaSearch" ng-include="'searcher.html'"></div>
 
-        <div ng-show="wannaCreate">
-            <h1>create</h1>
-        </div>
+        <div ng-show="wannaCreate" ng-include="'creator.html'"></div>
 
     </div>
 

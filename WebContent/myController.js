@@ -5,6 +5,8 @@ app.controller("myController", function($scope,$http){
     $scope.agentID = "";
     $scope.agentVerified = false;
     $scope.error_message = "";
+    $scope.recordSubmitted = false;
+
     $scope.verify = function(agent_id){
         ///verification
 
@@ -13,8 +15,15 @@ app.controller("myController", function($scope,$http){
         $scope.agentVerified = true;
         $scope.error_message = "no error";
     };
-
-
+    $scope.createRecord = function(attributes){
+        $scope.thingsToSubmit = attributes;
+        $scope.recordSubmitted = true;
+        ///submit
+    };
+    $scope.creatorReset = function(){
+        $scope.recordSubmitted = false;
+        $scope.thingsToSubmit = {};
+    };
 
 
 
@@ -46,6 +55,7 @@ app.controller("myController", function($scope,$http){
         $scope.searchComplete = false;
         $scope.updateShow= false;
         $scope.userIDToBeUpdated = "";
+        $scope.userID = "";
     };
 });
 
