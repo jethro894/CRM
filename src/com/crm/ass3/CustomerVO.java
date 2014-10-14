@@ -1,6 +1,7 @@
 package com.crm.ass3;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CustomerVO extends VOBase{
 	protected final String[] default_facet = {"ID", "Name", "Email", "PhoneNo", "AgentID"};
@@ -28,6 +29,24 @@ public class CustomerVO extends VOBase{
 	public void setAgentID(String agentID){
 		IDVO av = new IDVO(agentID);
 		this.createFacet(default_facet[4], (VOBase)av);
+	}
+	
+	public static List<String> ambiguousLookup(String key){
+		List<String> candidateIDs = null;
+		///
+		return candidateIDs;
+	}
+	
+	public static CustomerVO lookupCustomerVO(String customerID){
+		CustomerVO cv = null;
+		///
+		return cv;
+	}
+	
+	public static CustomerVO updateCustomer(){
+		CustomerVO cv = null;
+		///
+		return cv;
 	}
 	
 	public CustomerVO(String name, String email, String phone){

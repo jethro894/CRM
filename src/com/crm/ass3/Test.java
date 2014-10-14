@@ -9,6 +9,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		CustomerVO cvo = new CustomerVO("jethro", "3447", "j@lc");
 		System.out.print(cvo.retrieveID().getID());
+		
 	}
 
 }
