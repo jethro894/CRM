@@ -22,6 +22,10 @@ public class VOBase {
 		return result;
 	}
 	
+	public String getPayload(){
+		return this.payload;
+	}
+	
 	public VOBase(Map<String, VOBase> facets){
 		this.myFacets = facets;
 	}

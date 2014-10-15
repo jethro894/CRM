@@ -1,10 +1,11 @@
 package com.crm.ass3;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class AgentVO extends VOBase{
-	protected final String[] default_facet = {"ID", "Name", "Email", "PhoneNo", "CustomerList"};
+	protected final String[] default_facet = {"ID", "Name", "Email", "PhoneNo", "Address"};
 	
 	public IDVO retrieveID(){
 		return (IDVO)this.retrieveFacet(default_facet[0]);
@@ -22,10 +23,12 @@ public class AgentVO extends VOBase{
 		return (PhoneVO)this.retrieveFacet(default_facet[3]);
 	}
 	
-	public static AgentVO lookupAgentID(String agentID){
-		AgentVO av = null;
-		///lookup in database
-		return av;
+	public AddressVO retrieveAddress(){
+		return (AddressVO) this.retrieveFacet(default_facet[4]);
+	}
+	
+	public static AgentVO retrieveAgent(String agentID){
+		return AgentDBAPI.retrieveAgent(agentID);
 	}
 	
 	protected List<String> lookup(String agentID, String key){
@@ -35,14 +38,21 @@ public class AgentVO extends VOBase{
 	}
 	
 	public static CustomerVO updateCustomer(){
+		//
 		return CustomerVO.updateCustomer();
 	}
 	
-	public CustomerVO createCustomer(){
+	synchronized public CustomerVO createCustomer() throws IOException{
 		CustomerVO cv = null;
 		///
+		CustomerDBAPI.saveCustomer(cv);
 		return cv;
 	}
+	
+	public CustomerVO getCustomer(String customerID){
+		return CustomerDBAPI.retrieveCustomer(customerID);
+	}
+	
 	
 	public AgentVO(String id, String name, String email, String phone){
 		this.myFacets = new HashMap<String , VOBase>();
