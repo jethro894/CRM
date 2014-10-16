@@ -44,12 +44,6 @@ public class CustomerVO extends VOBase{
 		this.createFacet(default_facet[4], (VOBase)av);
 	}
 	
-	/*public static List<String> ambiguousLookup(String key){
-		List<String> candidateIDs = null;
-		///
-		return candidateIDs;
-	}*/
-	
 	public static CustomerVO retrieveCustomerVO(String customerID){
 		return CustomerDBAPI.retrieveCustomer(customerID);
 	}

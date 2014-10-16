@@ -1,6 +1,7 @@
 package com.crm.ass3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,10 +40,19 @@ public class AgentVO extends VOBase{
 		return AgentDBAPI.retrieveAgent(agentID);
 	}
 	
-	protected List<String> lookup(String agentID, String key){
+	protected List<String> lookup(String key){
+		String agentID = this.retrieveID().getID();
 		List<String> candidateIDs = null;
 		///
 		return candidateIDs;
+	}
+	
+	public List<VOBase> ambiguousLookupResult(String key){
+		List<VOBase> candidateVOs = new ArrayList<VOBase>();
+		for(String id: this.lookup(key)){
+			candidateVOs.add(this.getCustomer(id));
+		}
+		return candidateVOs;
 	}
 	
 	public void updateCustomer(CustomerParams cp){
