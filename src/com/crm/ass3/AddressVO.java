@@ -13,6 +13,10 @@ public class AddressVO extends VOBase{
 		this.payload = this.AddressLine1 + "\n" + this.AddressLine2 + "\n" + this.City + ", " + this.State + ", " + this.Zip + "\n" + this.Country;
 	}
 	
+	public AddressVO(String addr){
+		this.payload = addr;
+	}
+	
 	public String getAddress(){
 		return this.payload;
 	}

@@ -6,10 +6,11 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubt
 		AddressVO avo = new AddressVO("122 la salle","apt 9","new york","ny","10027","us");
-		CustomerVO cvo = new CustomerVO("jethro", "3447", "j@lc", "agent k", avo);
-		System.out.print(cvo.retrieveAddress().getAddress());
+		CustomerParams cp = new CustomerParams("target");
+		cp.setAddress(avo);
+		//AgentVO.updateCustomer(cp);
 		
 	}
 

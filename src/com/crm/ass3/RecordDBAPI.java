@@ -40,10 +40,11 @@ public class RecordDBAPI {
 	
 	//update a recordvo
 	synchronized public static void updateRecord(RecordVO rcv){
-		file = new File(filename);
+		/*file = new File(filename);
 		if(!file.exists())
-			return;
+			return;*/
 		///do sth
+		rcv.print();
 	}
 	
 	//delete a record from db

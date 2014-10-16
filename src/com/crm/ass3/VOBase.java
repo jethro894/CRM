@@ -26,6 +26,12 @@ public class VOBase {
 		return this.payload;
 	}
 	
+	public void print(){
+		for(VOBase v : myFacets.values()){
+			System.out.println(v.payload);
+		}
+	}
+	
 	public VOBase(Map<String, VOBase> facets){
 		this.myFacets = facets;
 	}

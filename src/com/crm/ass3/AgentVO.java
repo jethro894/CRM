@@ -37,15 +37,14 @@ public class AgentVO extends VOBase{
 		return candidateIDs;
 	}
 	
-	public static CustomerVO updateCustomer(){
-		//
-		return CustomerVO.updateCustomer();
+	public void updateCustomer(CustomerParams cp){
+		CustomerDBAPI.updateCustomer((CustomerVO)cp);
 	}
 	
-	synchronized public CustomerVO createCustomer() throws IOException{
+	public CustomerVO createCustomer() throws IOException{
 		CustomerVO cv = null;
 		///
-		CustomerDBAPI.saveCustomer(cv);
+		//CustomerDBAPI.saveCustomer(cv);
 		return cv;
 	}
 	

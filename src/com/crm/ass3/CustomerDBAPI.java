@@ -39,10 +39,11 @@ public class CustomerDBAPI {
 	
 	//update a customervo
 	synchronized public static void updateCustomer(CustomerVO cv){
-		file = new File(filename);
+		/*file = new File(filename);
 		if(!file.exists())
-			return;
+			return;*/
 		///do sth
+		cv.print();
 	}
 	
 	//delete a customer from db
