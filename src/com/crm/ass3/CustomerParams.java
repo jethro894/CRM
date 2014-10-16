@@ -10,4 +10,7 @@ public class CustomerParams extends CustomerVO{
 		this.createFacet(default_facet[0], (VOBase)iv);
 	}
 
+	public CustomerParams(){
+		this.myFacets = new HashMap<String , VOBase>();
+	}
 }

@@ -32,6 +32,16 @@ public class RecordVO extends VOBase{
 	public TimeVO retriveRecordTime(){
 		return (TimeVO)this.retrieveFacet(default_facet[6]);
 	}
+	
+	private void initiateID(){
+		IDVO iv = new IDVO();
+		this.createFacet(default_facet[5], (VOBase)iv);
+	}
+	
+	private void initiateTime(){
+		TimeVO t = new TimeVO();
+		this.createFacet(default_facet[6], (VOBase)t);
+	}
 
 	public void setCustomerID(IDVO i){ this.createFacet(default_facet[0], (VOBase)i);}
 	
@@ -43,16 +53,15 @@ public class RecordVO extends VOBase{
 	
 	public void setTextSummary(TextVO t){ this.createFacet(default_facet[4], (VOBase)t);}
 	
-	
-	public RecordVO(String customerID, String agentID, boolean isVoice, Object data, String textSummary){
-		
-	}
-	
 	public RecordVO(){
 		this.myFacets = new HashMap<String , VOBase>();
-		IDVO iv = new IDVO();
-		TimeVO t = new TimeVO();
-		this.createFacet(default_facet[5], (VOBase)iv);
-		this.createFacet(default_facet[6], (VOBase)t);
+		this.initiateID();
+		this.initiateTime();
+	}
+	
+	public RecordVO(RecordParams rp){
+		this.myFacets = rp.myFacets;
+		this.initiateID();
+		this.initiateTime();
 	}
 }

@@ -29,6 +29,11 @@ public class CustomerVO extends VOBase{
 		return (AddressVO) this.retrieveFacet(default_facet[5]);
 	}
 	
+	private void initiateID(){
+		IDVO iv = new IDVO();
+		this.createFacet(default_facet[0], (VOBase)iv);
+	}
+	
 	public void setName(NameVO n){ this.createFacet(default_facet[1], (VOBase)n);}
 	
 	public void setEmail(EmailVO e){ this.createFacet(default_facet[2], (VOBase)e);}
@@ -54,25 +59,28 @@ public class CustomerVO extends VOBase{
 	
 	public CustomerVO(String name, String email, String phone, String agentID, AddressVO avo){
 		this.myFacets = new HashMap<String , VOBase>();
+		this.initiateID();
 		
-		IDVO iv = new IDVO();
 		NameVO nv = new NameVO(name);
 		EmailVO ev = new EmailVO(email);
 		PhoneVO pv = new PhoneVO(phone);
 		IDVO av = new IDVO(agentID);
 		
-		this.createFacet(default_facet[0], (VOBase)iv);
 		this.createFacet(default_facet[1], (VOBase)nv);
 		this.createFacet(default_facet[2], (VOBase)ev);
 		this.createFacet(default_facet[3], (VOBase)pv);
 		this.createFacet(default_facet[4], (VOBase)av);
 		this.createFacet(default_facet[5], (VOBase)avo);
-		
 	}
 	
 	public CustomerVO(){
 		this.myFacets = new HashMap<String , VOBase>();
-		IDVO iv = new IDVO();
-		this.createFacet(default_facet[0], (VOBase)iv);
+		this.initiateID();
+	}
+	
+	public CustomerVO(CustomerParams cp){
+		//if(Map<String, VOBase> m : cp.myFacets)
+		this.myFacets = cp.myFacets;
+		this.initiateID();
 	}
 }

@@ -28,6 +28,11 @@ public class AgentVO extends VOBase{
 		return (AddressVO) this.retrieveFacet(default_facet[4]);
 	}
 	
+	private void setID(String id){
+		IDVO iv = new IDVO(id);
+		this.createFacet(default_facet[0], (VOBase)iv);
+	}
+	
 	public void setName(NameVO n){ this.createFacet(default_facet[1], (VOBase)n);}
 	
 	public void setEmail(EmailVO e){ this.createFacet(default_facet[2], (VOBase)e);}
@@ -63,16 +68,15 @@ public class AgentVO extends VOBase{
 		RecordDBAPI.updateRecord((RecordVO)rp);
 	}
 	
-	public CustomerVO createCustomer() throws IOException{
-		CustomerVO cv = null;
-		///
-		//CustomerDBAPI.saveCustomer(cv);
+	public CustomerVO createCustomer(CustomerParams cp) throws IOException{
+		CustomerVO cv = new CustomerVO(cp);
+		CustomerDBAPI.saveCustomer(cv);
 		return cv;
 	}
 	
-	public RecordVO createRecord() throws IOException{
-		RecordVO rv = null;
-		///
+	public RecordVO createRecord(RecordParams rp) throws IOException{
+		RecordVO rv = new RecordVO(rp);
+		RecordDBAPI.saveRecord(rv);
 		return rv;
 	}
 	
@@ -86,13 +90,12 @@ public class AgentVO extends VOBase{
 	
 	public AgentVO(String id, String name, String email, String phone){
 		this.myFacets = new HashMap<String , VOBase>();
+		this.setID(id);
 		
-		IDVO iv = new IDVO(id);
 		NameVO nv = new NameVO(name);
 		EmailVO ev = new EmailVO(email);
 		PhoneVO pv = new PhoneVO(phone);
 		
-		this.createFacet(default_facet[0], (VOBase)iv);
 		this.createFacet(default_facet[1], (VOBase)nv);
 		this.createFacet(default_facet[2], (VOBase)ev);
 		this.createFacet(default_facet[3], (VOBase)pv);
@@ -100,8 +103,6 @@ public class AgentVO extends VOBase{
 	
 	public AgentVO(String id){
 		this.myFacets = new HashMap<String , VOBase>();
-		
-		IDVO iv = new IDVO(id);
-		this.createFacet(default_facet[0], (VOBase)iv);
+		this.setID(id);
 	}
 }

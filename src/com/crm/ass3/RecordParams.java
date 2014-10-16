@@ -8,4 +8,8 @@ public class RecordParams extends RecordVO{
 		IDVO iv = new IDVO(targetID);
 		this.createFacet(default_facet[5], (VOBase)iv);
 	}
+	
+	public RecordParams(){
+		this.myFacets = new HashMap<String , VOBase>();
+	}
 }
