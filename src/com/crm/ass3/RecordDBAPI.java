@@ -17,17 +17,17 @@ public class RecordDBAPI {
 	}
 	
 	//save a recordvo to database
-	synchronized public static void saveRecord(RecordVO rcv){
+	public static void saveRecord(RecordVO rcv){
 		DBAPI.save(table, rcv);
 	}
 	
 	//update a recordvo
-	synchronized public static void updateRecord(RecordVO rcv){
+	public static void updateRecord(RecordVO rcv){
 		DBAPI.update(table, rcv);
 	}
 	
 	//delete a record from db
-	synchronized public static void deleteRecord(String recordID){
+	public static void deleteRecord(String recordID){
 		DBAPI.delete(table, recordID);
 	}
 }

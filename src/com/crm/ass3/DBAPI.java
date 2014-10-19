@@ -3,6 +3,10 @@ package com.crm.ass3;
 import java.util.List;
 
 public class DBAPI {
+	protected final String[] customer_facet = {"ID", "Name", "Email", "PhoneNo", "AgentID", "Address"};
+	protected final String[] agent_facet = {"ID", "Name", "Email", "PhoneNo", "Address"};
+	protected final String[] record_facet = {"CustomerID", "AgentID", "Type", "Data", "TextSummary", "RecordID", "Time"};
+	
 	public static VOBase retrieve(String tableName, String id){
 		VOBase vb = null;
 		///do sth

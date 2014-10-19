@@ -14,17 +14,17 @@ public class CustomerDBAPI {
 	}
 	
 	//save a customervo to database
-	synchronized public static void saveCustomer(CustomerVO cv){
+	public static void saveCustomer(CustomerVO cv){
 		DBAPI.save(table, cv);
 	}
 	
 	//update a customervo
-	synchronized public static void updateCustomer(CustomerVO cv){
+	public static void updateCustomer(CustomerVO cv){
 		DBAPI.update(table, cv);
 	}
 	
 	//delete a customer from db
-	synchronized public static void deleteCustomer(String customerID){
+	public static void deleteCustomer(String customerID){
 		DBAPI.delete(table, customerID);
 	}
 }

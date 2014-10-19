@@ -14,17 +14,17 @@ public class AgentDBAPI {
 	}
 	
 	//save a agentvo to database
-	synchronized public static void saveAgent(AgentVO av){
+	public static void saveAgent(AgentVO av){
 		DBAPI.save(table, av);
 	}
 	
 	//update a agentvo
-	synchronized public static void updateAgent(AgentVO av){
+	public static void updateAgent(AgentVO av){
 		DBAPI.update(table, av);
 	}
 	
 	//delete a agent from db
-	synchronized public static void deleteAgent(String agentID){
+	public static void deleteAgent(String agentID){
 		DBAPI.delete(table, agentID);
 	}
 }
