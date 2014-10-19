@@ -1,56 +1,30 @@
 package com.crm.ass3;
 
-import java.io.File;
-import java.io.IOException;
-
 public class CustomerDBAPI {
-	private final static String filename = "customers.txt";
-	protected static File file;
+	private final static String table = "customers";
 	
 	//given customerID, retrieve a customerVO
 	public static CustomerVO retrieveCustomer(String customerID){
-		file = new File(filename);
-		if(!file.exists())
-			return null;
-		
-		CustomerVO cv = null;
-		///do sth
-		return cv;
+		return (CustomerVO)DBAPI.retrieve(table, customerID);
 	}
 	
 	//given some keyword(email), return customerID
-	public static String lookupCustomer(){
-		file = new File(filename);
-		if(!file.exists())
-			return null;
-		
-		String resultID = null;
-		///do sth
-		return resultID;
+	public static String lookupCustomer(String key){
+		return DBAPI.lookup(table, key).get(0);
 	}
 	
 	//save a customervo to database
-	synchronized public static void saveCustomer(CustomerVO cv) throws IOException{
-		file = new File(filename);
-		if(!file.exists())
-			file.createNewFile();
-		///do sth
+	synchronized public static void saveCustomer(CustomerVO cv){
+		DBAPI.save(table, cv);
 	}
 	
 	//update a customervo
 	synchronized public static void updateCustomer(CustomerVO cv){
-		/*file = new File(filename);
-		if(!file.exists())
-			return;*/
-		///do sth
-		cv.print();
+		DBAPI.update(table, cv);
 	}
 	
 	//delete a customer from db
 	synchronized public static void deleteCustomer(String customerID){
-		file = new File(filename);
-		if(!file.exists())
-			return;
-		///do sth
+		DBAPI.delete(table, customerID);
 	}
 }
