@@ -1,0 +1,100 @@
+<div>
+    <hr>
+    <form class="form-horizontal" role="form">
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> Agent ID: </label>
+            <input type="text" style="width:400px;margin:0;" class="form-control" ng-model="agentID" readonly>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Customer ID: </label>
+            <input type="text" style="width:400px;margin:0;" class="form-control" ng-model="userIDToBeUpdated" readonly>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">First Name: </label>
+            <input type="text" style="width:400px;margin:0;" class="form-control" ng-model="new.fName" placeholder="first name">
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name: </label>
+            <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.lName" placeholder="last name">
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email: </label>
+            <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.email" placeholder="email">
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Telephone: </label>
+            <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.tel" placeholder="tel">
+        </div>
+        </div>
+    </form>
+    <p style="text-align:center">
+        <button class="btn btn-success" ng-click="updateUser(agentID, userIDToBeUpdated, new)">
+            <span class="glyphicon glyphicon-ok"></span> Submit
+        </button>
+    </p>
+</div>
+<hr>
+<div ng-show="testCustomer" class="jumbotron">
+    <h4 style="text-align:center"> Update Submitted!</h4>
+    <div style="background-color: lavender;">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                Agent ID
+            </th>
+            <th>
+                Customer ID
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Telephone
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>
+                {{agentID}}
+            </td>
+            <td>
+                {{userIDToBeUpdated}}
+            </td>
+            <td>
+                {{new.fName}}
+            </td>
+            <td>
+                {{new.lName}}
+            </td>
+            <td>
+                {{new.email}}
+            </td>
+            <td>
+                {{new.tel}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    <br><br><br>
+</div>
