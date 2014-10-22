@@ -1,0 +1,79 @@
+
+<div class="container">
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Record ID: </label>
+        <input type="text" ng-model="recordIDToBeUpdated" readonly>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Customer ID: </label>
+        <input type="text" ng-model="newRec2.userID" placeholder="customer ID">
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Data: </label>
+        <input type="text" ng-model="newRec2.contactData" placeholder="contact data">
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Type: </label>
+        <select ng-model="newRec2.contactModel" placeholder="contact method">
+            <option value="email">E-mail</option>
+            <option value="phone">Telephone</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Text Summary: </label>
+        <textarea type="message" cols="40" rows="10" maxlength="200" ng-model="newRec2.textSummary"></textarea>
+    </div>
+</form>
+<br>
+<p style="text-align: center">
+    <button class="btn btn-success" ng-click="createRecord(recordIDToBeUpdated, newRec2)">
+        <span class="glyphicon glyphicon-user"></span>Update Record
+    </button>
+</p>
+<hr>
+
+<div ng-show="testRecord" class="jumbotron">
+    <h4 style="text-align: center"> Record Updated!</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                Record ID
+            </th>
+            <th>
+                Customer ID
+            </th>
+            <th>
+                Data
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Text Summary
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                {{recordIDToBeUpdated}}
+            </td>
+            <td>
+                {{newRec2.userID}}
+            </td>
+            <td>
+                {{newRec2.contactData}}
+            </td>
+            <td>
+                {{newRec2.contactModel}}
+            </td>
+            <td>
+                {{newRec2.textSummary}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br><br>
+</div></div>
