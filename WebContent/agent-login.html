@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <title>Agent Log-in</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <p>Agent ID: <input type="text" ng-model="agentid_to_search" placeholder="Enter Agent ID..."> {{error_message}}</p>
+        <p><button class="btn btn-success" ng-click="verify(agentid_to_search)">
+            <span class="glyphicon glyphicon-user"></span> Authenticate
+            </button></p>
+        <hr>
+        <div ng-show="agentVerified">
+            <p><button class="btn btn-success" ng-click="wannaSearch=true; wannaCreate=false; searcherReset()">
+                <span class="glyphicon glyphicon-user"></span> Search People
+            </button>
+            <button class="btn btn-success" ng-click="wannaCreate=true; wannaSearch=false; creatorReset()">
+                <span class="glyphicon glyphicon-user"></span> Create Record
+            </button></p>
+        </div>
+        <div ng-show="wannaSearch" ng-include="'searcher.html'"></div>
+
+        <div ng-show="wannaCreate" ng-include="'creator.html'"></div>
+
+    </div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="myApp.js"></script>
+    <script src="myController.js"></script>
+</body>
+</html>
