@@ -1,4 +1,4 @@
-sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
+
 /usr/local/mysql/bin/mysql -u root -p
 create database homework2;
 use homework2;
@@ -41,23 +41,11 @@ SELECT customer.id,id.idnumber,name.firstname,name.middlename,name.lastname,addr
 FROM customer,id,name,address,email,phone
 WHERE (customer.customerid = id.id AND customer.name = name.id AND customer.address = address.id AND customer.phonenumber = phone.id AND customer.email = email.id)
 
+
 CREATE VIEW view_record AS
-SELECT contacttype.contacttype,contactdata.contactdata,text.textcontent,time.time
+SELECT record.id, record.customerid, record.agentid,contacttype.contacttype,contactdata.contactdata,text.textcontent,time.time
 FROM record, contacttype,contactdata,text,time
 WHERE (record.type = contacttype.id  AND record.data = contactdata.id AND record.textsummary = text.id AND record.time = time.id)
 
-CREATE VIEW view_record_full AS
-SELECT record.customerid, record.agentid,contacttype.contacttype,contactdata.contactdata,text.textcontent,time.time
-FROM record, contacttype,contactdata,text,time
-WHERE (record.type = contacttype.id  AND record.data = contactdata.id AND record.textsummary = text.id AND record.time = time.id)
 
-CREATE VIEW view_agent_new AS
-SELECT agent.id,id.idnumber,concat(name.firstname,' ',name.middlename,' ',name.lastname) AS name, concat(address.addressline1,',',address.addressline2,',',address.city,',',address.state,',',address.country,',',address.zip) as address,email.email,phone.phonenumber
-FROM agent,id,name,address,email,phone
-WHERE (agent.agentid = id.id AND agent.name = name.id AND agent.address = address.id AND agent.phonenumber = phone.id AND agent.email = email.id)
-
-
-
-grant all on *.* to 'wqf'@'%' identified by 'wangqifei' with grant option;
-flush privileges;
 GRANT USAGE ON *.* TO 'inta'@'%' IDENTIFIED BY 'inta' WITH GRANT OPTION;
