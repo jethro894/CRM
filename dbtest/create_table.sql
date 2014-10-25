@@ -8,7 +8,7 @@ create table Customer_Address(AddressLine1 VARCHAR(20),AddressLine2 VARCHAR(20),
 
 create table Agent_Address(AddressLine1 VARCHAR(20),AddressLine2 VARCHAR(20), City VARCHAR(20),
 								State VARCHAR(20), Country VARCHAR(20), Zip VARCHAR(20), AgentID integer, AAID integer,
-								6
+								PRIMARY KEY (AgentID,AAID), FOREIGN KEY(AgentID) REFERENCES Agent(AgentID) ON DELETE CASCADE);
 
 create table Customer_Name(firstname VARCHAR(20), middlename VARCHAR(20), lastname VARCHAR(20),CNID integer, CustomerID integer,
 							PRIMARY KEY (CustomerID,CNID),FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID) ON DELETE CASCADE);
