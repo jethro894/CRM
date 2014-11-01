@@ -1,9 +1,11 @@
 package com.crm.ass3;
 
 public class AddressVO extends VOBase{
+	protected final String[] default_facet = {"ID"};
 	protected String AddressLine1, AddressLine2, City, State, Country, Zip;
 	
 	public AddressVO(String a1, String a2, String ct, String s, String c, String z){
+		this.createFacet(default_facet[0], new IDVO());
 		this.AddressLine1 = a1;
 		this.AddressLine2 = a2;
 		this.City = ct;
@@ -14,6 +16,7 @@ public class AddressVO extends VOBase{
 	}
 	
 	public AddressVO(String addr){
+		this.createFacet(default_facet[0], new IDVO());
 		this.payload = addr;
 	}
 	
