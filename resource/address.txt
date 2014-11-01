@@ -1,0 +1,6 @@
+address.txt
+	A Street	Apt 1	NewYork	NY	U.S.	10001;
+	B Street	Apt 2	Jersey	NJ	U.S.	10002;
+	C Street	Apt 3	Boston	MA	U.S.	20003;
+	D Street	Apt 4	Washin	DC	U.S.	30005;
+	E Street	Apt 5	LAXXX	CA	U.S.	40006;
