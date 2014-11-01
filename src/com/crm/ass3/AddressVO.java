@@ -3,6 +3,7 @@ package com.crm.ass3;
 public class AddressVO extends VOBase{
 	protected final String[] default_facet = {"ID"};
 	protected String AddressLine1, AddressLine2, City, State, Country, Zip;
+	protected String[] payloadArray;
 	
 	public AddressVO(String a1, String a2, String ct, String s, String c, String z){
 		this.createFacet(default_facet[0], new IDVO());
@@ -13,14 +14,20 @@ public class AddressVO extends VOBase{
 		this.Country = c;
 		this.Zip = z;
 		this.payload = this.AddressLine1 + "\n" + this.AddressLine2 + "\n" + this.City + ", " + this.State + ", " + this.Zip + "\n" + this.Country;
+		this.payloadArray = new String[] {a1,a2,ct,s,z,c};
 	}
 	
-	public AddressVO(String addr){
+	/*public AddressVO(String addr){
 		this.createFacet(default_facet[0], new IDVO());
 		this.payload = addr;
-	}
+		this.payloadArray = addr.split(",|\n");
+	}*/
 	
 	public String getAddress(){
 		return this.payload;
 	}
+	
+	public String[] getAddressArray(){
+        return this.payloadArray;
+    }
 }
