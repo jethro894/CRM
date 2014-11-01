@@ -5,11 +5,11 @@ import java.util.HashMap;
 public class RecordVO extends VOBase{
 	protected final String[] default_facet = {"CustomerID", "AgentID", "Type", "Data", "TextSummary", "RecordID", "Time"};
 	
-	public IDVO retriveCustomerID(){
+	public IDVO retrieveCustomerID(){
 		return (IDVO)this.retrieveFacet(default_facet[0]);
 	}
 	
-	public IDVO retriveAgentID(){
+	public IDVO retrieveAgentID(){
 		return (IDVO)this.retrieveFacet(default_facet[1]);
 	}
 	
@@ -25,11 +25,11 @@ public class RecordVO extends VOBase{
 		return (TextVO)this.retrieveFacet(default_facet[4]);
 	}
 	
-	public IDVO retriveRecordID(){
+	public IDVO retrieveRecordID(){
 		return (IDVO)this.retrieveFacet(default_facet[5]);
 	}
 	
-	public TimeVO retriveRecordTime(){
+	public TimeVO retrieveRecordTime(){
 		return (TimeVO)this.retrieveFacet(default_facet[6]);
 	}
 	
