@@ -57,7 +57,7 @@ public class CustomerVO extends VOBase{
 		CustomerDBAPI.updateCustomer(this);
 	}
 	
-	public CustomerVO(String name, String email, String phone, String agentID, AddressVO avo){
+	/*public CustomerVO(String name, String email, String phone, String agentID, AddressVO avo){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.initiateID();
 		
@@ -71,7 +71,7 @@ public class CustomerVO extends VOBase{
 		this.createFacet(default_facet[3], (VOBase)pv);
 		this.createFacet(default_facet[4], (VOBase)av);
 		this.createFacet(default_facet[5], (VOBase)avo);
-	}
+	}*/
 	
 	public CustomerVO(){
 		this.myFacets = new HashMap<String , VOBase>();
