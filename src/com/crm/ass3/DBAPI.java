@@ -157,8 +157,8 @@ public class DBAPI {
             PreparedStatement Statement1 = connect.prepareStatement("INSERT INTO Customer VALUES(?,?)");
 
             Statement1.setString(1,vb.retrieveID().getID());
-            Statement1.setString(2,vb.retrieveEmail().getEmail());
-            Statement1.setString(3,vb.retrievePhone().getPhone());
+            Statement1.setString(3,vb.retrieveEmail().getEmail());
+            Statement1.setString(2,vb.retrievePhone().getPhone());
 
             PreparedStatement Statement2 = connect.prepareStatement("INSERT INTO Customer_Name VALUES(?,?)");
             String[] NameArray ＝ vb.retrieveName().getNameArray();
@@ -167,6 +167,7 @@ public class DBAPI {
             Statement2.setString(2,NameArray[1]);
             Statement2.setString(3,NameArray[2]);
             Statement2.setString(4,vb.retrieveID().getID());
+            Statement2.setString(5,vb.retrieveName().retrieveID().getID());
 
             PreparedStatement Statement3 = connect.prepareStatement("INSERT INTO Customer_Address VALUES(?,?)");
             // seperate into AL1|AL2|CT|STT|ZIP|CN insert from 1 to 6
@@ -180,6 +181,7 @@ public class DBAPI {
             Statement3.setString(5,AddressArray[4]);
             Statement3.setString(6,AddressArray[5]);
             Statement3.setString(7,vb.retrieveID().getID());
+            Statement3.setString(8,vb.retrieveAddress().retrieveID().getID());
 
    
         	break;
@@ -196,8 +198,8 @@ public class DBAPI {
             PreparedStatement Statement1 = connect.prepareStatement("INSERT INTO Agent VALUES(?,?)");
 
             Statement1.setString(1,vb.retrieveID().getID());
-            Statement1.setString(2,vb.retrieveEmail().getEmail());
-            Statement1.setString(3,vb.retrievePhone().getPhone());
+            Statement1.setString(3,vb.retrieveEmail().getEmail());
+            Statement1.setString(2,vb.retrievePhone().getPhone());
 
             PreparedStatement Statement2 = connect.prepareStatement("INSERT INTO Agent_Name VALUES(?,?)");
             String[] NameArray ＝ vb.retrieveName().getNameArray();
@@ -207,6 +209,7 @@ public class DBAPI {
             Statement2.setString(3,NameArray[2]);
             Statement2.setString(4,vb.retrieveID().getID());// This is for customerID
             //CNID insertation wanted
+            Statement2.setString(5,vb.retrieveName().retrieveID().getID());
 
             PreparedStatement Statement3 = connect.prepareStatement("INSERT INTO Agent_Address VALUES(?,?)");
             // seperate into AL1|AL2|CT|STT|ZIP|CN insert from 1 to 6
@@ -221,6 +224,7 @@ public class DBAPI {
             Statement3.setString(6,AddressArray[5]);
             // insert CAID needed
             Statement3.setString(7,vb.retrieveID().getID());
+            Statement3.setString(8,vb.retrieveAddress().retrieveID().getID());
 			    break; 
         	case "view_record":
         		PreparedStatement Statement=connect.prepareStatement("INSERT INTO record VALUES(?,?)");
@@ -232,6 +236,7 @@ public class DBAPI {
            		Statement.setString(5,vb.getRecordDataType().getContactType());
            		Statement.setString(6,vb.retriveRecordTime().getTime());
               // Record ID wanted
+                Statement.setString(7.vb.retrieveID().getID());
         	break;
         }
       
