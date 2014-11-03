@@ -22,6 +22,11 @@ public class NameVO extends VOBase{
 	public String getName(){
 		return this.payload;
 	}
+	
+	public IDVO retrieveID(){
+		return (IDVO)this.retrieveFacet(default_facet[0]);
+	}
+	
 	public String[] getNameArray(){
         return this.payloadArray;
     }
