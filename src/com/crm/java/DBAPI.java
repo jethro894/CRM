@@ -157,8 +157,8 @@ public class DBAPI {
             PreparedStatement Statement1 = connect.prepareStatement("INSERT INTO Customer VALUES(?,?)");
 
             Statement1.setString(1,vb.retrieveID().getID());
-            Statement1.setString(2,vb.retrieveEmail().getEmail());
-            Statement1.setString(3,vb.retrievePhone().getPhone());
+            Statement1.setString(3,vb.retrieveEmail().getEmail());
+            Statement1.setString(2,vb.retrievePhone().getPhone());
 
             PreparedStatement Statement2 = connect.prepareStatement("INSERT INTO Customer_Name VALUES(?,?)");
             String[] NameArray ＝ vb.retrieveName().getNameArray();
