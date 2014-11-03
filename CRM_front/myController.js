@@ -30,6 +30,9 @@ app.controller("myController", function($scope,$http){
 //  验证agent ID
     $scope.verify = function(agent_id){
         $scope.agentID = agent_id;
+
+
+
         // 用post方法返回agent_id给server, 通过authentication进行验证
         // 返回值(true/false)传给agentVerified
         // error message 传给error_message
@@ -53,6 +56,11 @@ app.controller("myController", function($scope,$http){
         $scope.RecordIDToBeSearched = "";
     }
     $scope.searchRecord=function(record_id){
+        // code goes here
+
+
+
+
         // 把record id post 过去, 取回来一个record值
         $scope.recordIDToBeSearched=record_id;
         $scope.searchRecordComplete=true;
@@ -62,12 +70,22 @@ app.controller("myController", function($scope,$http){
         $scope.recordIDToBeUpdated = record_id;
     };
     $scope.createRecordWanted=function(){
+        // code goes here
+
+
+
+
         // 需要从服务器取回一个分配的recordID
         // 不需要传递agentID
         $scope.recordID="456";
     }
 // 创建record
     $scope.createRecord = function(record_id, attributes){
+        // code goes here
+
+
+
+
         //需要传递 attribute和record_id
         $scope.thingsToSubmit = attributes;
         // 需要把create 的record的值用post 传给server
@@ -90,6 +108,13 @@ app.controller("myController", function($scope,$http){
     }
     $scope.searchUser = function(user_id){
         $scope.userIDToBeSearched = user_id;
+        // code goes here
+
+
+
+
+
+
         // 要将agentID和userIDToBeSearched一起回传，确定有权限的情况下才能够返回信息，否则
         // 报error
         // 返回来的信息存在users里
@@ -104,7 +129,24 @@ app.controller("myController", function($scope,$http){
         $scope.updateCustomerShow= true;
         $scope.userIDToBeUpdated = user_id;
     };
+    $scope.createCustomerWanted=function(){
+        // code goes here...
+
+
+
+
+        // 此处需要将 agentID 传回至服务器， 与userID 共同存入表中
+        $scope.userIDToBeCreated= 123;
+        //        此处需要向服务器发回一个请求取回userID
+        //        $scope.createCustomerShow=true;
+    }
     $scope.updateUser = function(agent_id, user_id, attributes){
+        // code goes here...
+
+
+
+
+
         // agent_id, user_id也要传过去
         // userIDToBeUpdate就是user_id
         $scope.CustomerToSubmit=attributes;
@@ -113,28 +155,6 @@ app.controller("myController", function($scope,$http){
 //        $scope.newCountry = attributes.Country;
         $scope.testCustomer = true;
     };
-    $scope.createCustomerWanted=function(){
-        // 此处需要将 agentID 传回至服务器， 与userID 共同存入表中
-        $scope.userIDToBeCreated= 123;
-        //        此处需要向服务器发回一个请求取回userID
-//        $scope.createCustomerShow=true;
-    }
 
-
-    // customer 操作
-//    $scope.CP_searchComplete=false;
-//    $scope.CP_userIDToBeSearched="";
-//    CP_searchUser=function(user_id){
-//        $scope.CP_userIDToBeSearched = user_id;
-//        // 要将agentID和userIDToBeSearched一起回传，确定有权限的情况下才能够返回信息，否则
-//        // 报error
-//        // 返回来的信息存在users里
-//        ///unused! $scope.agentID = agent_id || 0;
-//        ///$scope.agentID = (typeof agent_id === "undefined") ? "0" : agent_id;
-//        // 需要用get方法返回customer的数据, 传入user中
-////        $http.get("http://www.w3schools.com/website/Customers_JSON.php")
-////            .success(function(response) {$scope.users = response;});
-//        $scope.CP_searchComplete = true;
-//    }
 });
 

@@ -1,15 +1,16 @@
-<div style="background-color: lavenderblush;">
+<div style="background-color: lavender;">
     <br>
 <h4 style="text-align:center">Search Customer</h4>
 <p style="text-align:center">
     <input type="text" ng-model="id_to_search" size="35" placeholder="Please enter customer ID here..."><br><br>
-    <button class="btn btn-success" ng-click="searchUser(id_to_search)">
+    <button class="btn btn-default" ng-click="searchUser(id_to_search)">
         <span class="glyphicon glyphicon-user"></span> Search!
     </button>
-</p>
+</p><br>
 </div>
-<hr>
+
 <div ng-show="searchComplete">
+    <hr>
     <table class="table table-striped">
         <thead>
         <tr>
