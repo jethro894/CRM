@@ -88,7 +88,7 @@ public class AgentVO extends VOBase{
 		return RecordDBAPI.retrieveRecord(recordID);
 	}
 	
-	public AgentVO(String id, String name, String email, String phone){
+	/*public AgentVO(String id, String name, String email, String phone){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.setID(id);
 		
@@ -99,10 +99,16 @@ public class AgentVO extends VOBase{
 		this.createFacet(default_facet[1], (VOBase)nv);
 		this.createFacet(default_facet[2], (VOBase)ev);
 		this.createFacet(default_facet[3], (VOBase)pv);
-	}
+	}*/
 	
 	public AgentVO(String id){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.setID(id);
+	}
+	
+	public AgentVO(){
+		this.myFacets = new HashMap<String , VOBase>();
+		IDVO iv = new IDVO();
+		this.createFacet(default_facet[0], (VOBase)iv);
 	}
 }

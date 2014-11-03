@@ -22,6 +22,9 @@ public class AddressVO extends VOBase{
 		this.payload = addr;
 		this.payloadArray = addr.split(",|\n");
 	}*/
+	public IDVO retrieveID(){
+		return (IDVO)this.retrieveFacet(default_facet[0]);
+	}
 	
 	public String getAddress(){
 		return this.payload;
