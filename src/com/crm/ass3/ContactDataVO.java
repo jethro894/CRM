@@ -1,7 +1,7 @@
 package com.crm.ass3;
 
 public class ContactDataVO extends VOBase{
-	public ContactDataVO(String d, ContactTypeVO ct){
+	public ContactDataVO(String d){
 		/*if(ct.isVoice()){}
 		else{}*/
 		this.payload = d;

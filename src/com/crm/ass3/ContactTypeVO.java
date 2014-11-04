@@ -1,11 +1,8 @@
 package com.crm.ass3;
 
 public class ContactTypeVO extends VOBase{
-	public ContactTypeVO(boolean isVoice){
-		if(isVoice == true)
-			this.payload = "Voice";
-		else
-			this.payload = "Text";
+	public ContactTypeVO(String tp){
+			this.payload = tp;
 	}
 	
 	public String getContactType(){

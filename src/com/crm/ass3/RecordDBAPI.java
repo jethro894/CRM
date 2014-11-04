@@ -17,17 +17,17 @@ public class RecordDBAPI {
 	}
 	
 	//save a recordvo to database
-	public static void saveRecord(RecordVO rcv){
-		DBAPI.save(table, rcv);
+	public static boolean saveRecord(RecordVO rcv){
+		return DBAPI.save(table, rcv);
 	}
 	
 	//update a recordvo
-	public static void updateRecord(RecordVO rcv){
-		DBAPI.update(table, rcv);
+	public static boolean updateRecord(RecordVO rcv){
+		return DBAPI.update(table, rcv);
 	}
 	
 	//delete a record from db
-	public static void deleteRecord(String recordID){
-		DBAPI.delete(table, recordID);
+	public static boolean deleteRecord(String recordID){
+		return DBAPI.delete(table, recordID);
 	}
 }
