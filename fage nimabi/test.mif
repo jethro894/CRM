@@ -1,0 +1,31 @@
+EXERCISE ASSIGNMENT:
+
+Create a Makefile for the C program whose source code is in the folders "inc"
+(header files) and "src" (source files). The source code should not be moved
+from these folders.
+
+When you have completed your work, make sure to ***push*** your Makefile onto the
+Git ***remote repository***.  Failing to do so is equivalent to failing the
+exercise.
+
+The Makefile should contain distinct rules for the following tasks:
+compile the source code, run the program, and clean the working directory.
+
+A successful execution of the program generates the following output:
+
+-- console output start --------------------------------------------------------
+
+WAMI kernel 1 parameters:
+
+Input image width = 512 pixels
+Input image height = 512 pixels
+Output image width = 508 pixels
+Output image height = 508 pixels
+
+Starting WAMI kernel 1 (debayer).
+Validation checks passed -- the test output matches the golden output.
+
+Writing output to ./small_kernel1_output.bin.
+
+-- console output end ----------------------------------------------------------
+
