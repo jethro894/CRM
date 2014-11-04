@@ -2,6 +2,8 @@ package com.crm.ass3;
 
 import java.util.HashMap;
 
+import net.sf.json.JSONObject;
+
 public class RecordVO extends VOBase{
 	protected final String[] default_facet = {"CustomerID", "AgentID", "Type", "Data", "TextSummary", "RecordID", "Time"};
 	
@@ -53,15 +55,58 @@ public class RecordVO extends VOBase{
 	
 	public void setTextSummary(TextVO t){ this.createFacet(default_facet[4], (VOBase)t);}
 	
+	//创建record甄1�7
 	public RecordVO(){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.initiateID();
 		this.initiateTime();
 	}
 	
-	public RecordVO(RecordParams rp){
-		this.myFacets = rp.myFacets;
-		this.initiateID();
-		this.initiateTime();
+	//更新record甄1�7
+	public RecordVO(String recordid){
+		this.myFacets = new HashMap<String , VOBase>();
+		IDVO recordID=new IDVO(recordid);
+		this.createFacet(default_facet[5], recordID);
+		this.initiateTime();//修改时间
+	}
+	
+	//更新record
+	public boolean updateSelf(){
+		return RecordDBAPI.updateRecord(this);
+	}
+	
+	//创建record,如果成功，则返回recordid，如果失败，则返回null
+	public boolean createRecord(){
+		return RecordDBAPI.saveRecord(this);
+		
+	}
+	
+	public static RecordVO getRecord(String recordID){
+		return RecordDBAPI.retrieveRecord(recordID);
+	}
+	
+	public static boolean deleteRecord(String recordID){
+		return RecordDBAPI.deleteRecord(recordID);		
+	}
+	
+	public JSONObject ToJson(){
+		JSONObject jsonObject = new JSONObject();
+		//CustomerID attribute
+		jsonObject.put("customerID", this.retrieveCustomerID().getID());
+		//AgentID attribute
+		jsonObject.put("agentID", this.retrieveAgentID().getID());
+		//Type attribute
+		jsonObject.put("contactType", this.getRecordDataType().getContactType());
+		//data attribute
+		jsonObject.put("contactData", this.getRecordData().getContactData());
+		//TextSummary
+		jsonObject.put("TextSummary", this.getTextSummary().getText());
+		//RecordID
+		jsonObject.put("RecordID", this.retrieveRecordID().getID());
+		//Time attribute
+		jsonObject.put("RecordTime", this.retrieveRecordTime().getTime());
+
+		return jsonObject;
+		
 	}
 }

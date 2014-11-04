@@ -1,9 +1,9 @@
 package com.crm.ass3;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import net.sf.json.JSONObject;
 
 public class AgentVO extends VOBase{
 	protected final String[] default_facet = {"ID", "Name", "Email", "PhoneNo", "Address"};
@@ -52,63 +52,62 @@ public class AgentVO extends VOBase{
 		return candidateIDs;
 	}
 	
-	public List<VOBase> ambiguousLookupResult(String key){
+/*	public List<VOBase> ambiguousLookupResult(String key){
 		List<VOBase> candidateVOs = new ArrayList<VOBase>();
 		for(String id: this.lookup(key)){
 			candidateVOs.add(this.getCustomer(id));
 		}
 		return candidateVOs;
 	}
+*/
 	
-	public void updateCustomer(CustomerParams cp){
-		CustomerDBAPI.updateCustomer((CustomerVO)cp);
-	}
-	
-	public void updateRecord(RecordParams rp){
-		RecordDBAPI.updateRecord((RecordVO)rp);
-	}
-	
-	public CustomerVO createCustomer(CustomerParams cp) throws IOException{
-		CustomerVO cv = new CustomerVO(cp);
-		CustomerDBAPI.saveCustomer(cv);
-		return cv;
-	}
-	
-	public RecordVO createRecord(RecordParams rp) throws IOException{
-		RecordVO rv = new RecordVO(rp);
-		RecordDBAPI.saveRecord(rv);
-		return rv;
-	}
-	
-	public CustomerVO getCustomer(String customerID){
+/*	public CustomerVO getCustomer(String customerID){
 		return CustomerDBAPI.retrieveCustomer(customerID);
 	}
+*/
 	
-	public RecordVO getRecord(String recordID){
-		return RecordDBAPI.retrieveRecord(recordID);
+	public static boolean verifyAgent(String AgentID){
+		return AgentDBAPI.verifyAgent(AgentID);
 	}
 	
-	/*public AgentVO(String id, String name, String email, String phone){
-		this.myFacets = new HashMap<String , VOBase>();
-		this.setID(id);
-		
-		NameVO nv = new NameVO(name);
-		EmailVO ev = new EmailVO(email);
-		PhoneVO pv = new PhoneVO(phone);
-		
-		this.createFacet(default_facet[1], (VOBase)nv);
-		this.createFacet(default_facet[2], (VOBase)ev);
-		this.createFacet(default_facet[3], (VOBase)pv);
-	}*/
+	//public static boolean searchAgent(String AgentID){
+	//	return AgentDBAPI.searchAgent(AgentID);
+	//}
+	
+/*	public RecordVO getRecord(String recordID){
+		return RecordDBAPI.retrieveRecord(recordID);
+	}
+*/
 	
 	public AgentVO(String id){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.setID(id);
 	}
 	
-	public AgentVO(){
-		this.myFacets = new HashMap<String , VOBase>();
-		IDVO iv = new IDVO();
-		this.createFacet(default_facet[0], (VOBase)iv);
+	public JSONObject ToJson(){
+		JSONObject jsonObject = new JSONObject();
+		//ID attribute
+		jsonObject.put("agentID", this.retrieveID().getID());
+		//name attribute
+		JSONObject nameObject = new JSONObject();
+		nameObject.put("firstName", this.retrieveName().firstname);
+		nameObject.put("middleName", this.retrieveName().middlename);
+		nameObject.put("lastName", this.retrieveName().lastname);
+		jsonObject.put("agentName", nameObject);
+		//email attribute
+		jsonObject.put("agentEmail", this.retrieveEmail().getEmail());
+		//Phone No
+		jsonObject.put("agentPhone", this.retrievePhone().payload);
+		//Address attribute
+		JSONObject addressObject = new JSONObject();
+		addressObject.put("AddressLine1", this.retrieveAddress().AddressLine1);
+		addressObject.put("AddressLine2", this.retrieveAddress().AddressLine2);
+		addressObject.put("City", this.retrieveAddress().City);
+		addressObject.put("Country", this.retrieveAddress().Country);
+		addressObject.put("State", this.retrieveAddress().State);
+		addressObject.put("ZipCode", this.retrieveAddress().Zip);
+		jsonObject.put("agentAddress", addressObject);
+		return jsonObject;
+		
 	}
 }
