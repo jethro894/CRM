@@ -1,5 +1,7 @@
 package com.crm.ass3;
 
+import java.util.List;
+
 public class AgentDBAPI {
 	private final static String table = "agents";
 	
@@ -9,8 +11,8 @@ public class AgentDBAPI {
 		}
 	
 	//given some keyword(email), return agentID
-	public static String lookupAgent(String key){
-		return DBAPI.lookup(table, key).get(0);
+	public static List<String> lookupAgent(String key){
+		return DBAPI.lookup(table, key);
 	}
 	
 	//save a agentvo to database
@@ -26,5 +28,11 @@ public class AgentDBAPI {
 	//delete a agent from db
 	public static void deleteAgent(String agentID){
 		DBAPI.delete(table, agentID);
+	}
+	
+	public static boolean verifyAgent(String agentID){
+		///;
+		
+		return true;
 	}
 }
