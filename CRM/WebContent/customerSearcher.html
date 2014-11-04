@@ -1,0 +1,44 @@
+<div style="background-color: lavender;">
+    <br>
+<h4 style="text-align:center">Search Customer</h4>
+<p style="text-align:center">
+    <input type="text" ng-model="id_to_search" size="35" placeholder="Please enter customer ID here..."><br><br>
+    <button class="btn btn-default" ng-click="searchUser(id_to_search)">
+        <span class="glyphicon glyphicon-user"></span> Search!
+    </button>
+</p><br>
+</div>
+
+<div ng-show="searchComplete">
+    <hr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Customer ID</th>
+            <th>Agent ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in users">
+            <td>
+                <button class="btn" ng-click="updateCustomerWanted(x.cid)">
+                    <span class="glyphicon glyphicon-pencil"></span>  Update
+                </button>
+            </td>
+            <td>{{ x.cid }}</td>
+            <td>{{ x.aid }}</td>
+            <td>{{ x.fName }}</td>
+            <td>{{ x.lName }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.tel }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-show="updateCustomerShow" ng-include="'customerUpdater.html'"></div>
