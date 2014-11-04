@@ -43,13 +43,13 @@ public class DBAPI {
         		
         		ResultSet rs1 = stmt.executeQuery("SELECT * FROM view_customer WHERE CustomerID = id");
         		
-        		NameVO nv1 = new NameVO(rs1.getString("firstname"), rs1.getString("middlename"), rs1.getString("lastname"));
-        		AddressVO av1 = new AddressVO(rs1.getString("AddressLine1"), rs1.getString("AddressLine2"), rs1.getString("City"),
-        									 rs1.getString("State"), rs1.getString("Country"), rs1.getString("Zip"));
-        		IDVO iv1 = new IDVO(rs1.getString("CustomerID"));
-        		EmailVO ev1 = new EmailVO(rs1.getString("Email"));
-        		PhoneVO pv1 = new PhoneVO(rs1.getString("PhoneNo"));
-        		IDVO iv2 = new IDVO(rs1.getString("AgentID"));
+        		//NameVO nv1 = new NameVO(rs1.getString("firstname"), rs1.getString("middlename"), rs1.getString("lastname"));
+        		//AddressVO av1 = new AddressVO(rs1.getString("AddressLine1"), rs1.getString("AddressLine2"), rs1.getString("City"),
+        		//							 rs1.getString("State"), rs1.getString("Country"), rs1.getString("Zip"));
+        		//IDVO iv1 = new IDVO(rs1.getString("CustomerID"));
+        		//EmailVO ev1 = new EmailVO(rs1.getString("Email"));
+        		//PhoneVO pv1 = new PhoneVO(rs1.getString("PhoneNo"));
+        		//IDVO iv2 = new IDVO(rs1.getString("AgentID"));
         		//vb = new CustomerVO(rs1.getString("CustomerID"), nv1, rs1.getString("Email"),rs1.getString("PhoneNo"),rs1.getString("AgentID"),av1);
         		//vb = new CustomerVO(iv1,nv1,ev1,pv1,iv2,av1);
         		vb = new CustomerVO(rs1.getString("CustomerID"));
@@ -63,9 +63,9 @@ public class DBAPI {
         		
         		ResultSet rs2 = stmt.executeQuery("SELECT * FROM view_agent WHERE AgentID = id");
         		
-        		NameVO nv2 = new NameVO(rs2.getString("firstname"), rs2.getString("middlename"), rs2.getString("lastname"));
-        		AddressVO av2 = new AddressVO(rs2.getString("AddressLine1"), rs2.getString("AddressLine2"), rs2.getString("City"),
-        									 rs2.getString("State"), rs2.getString("Country"), rs2.getString("Zip"));
+        		//NameVO nv2 = new NameVO(rs2.getString("firstname"), rs2.getString("middlename"), rs2.getString("lastname"));
+        		//AddressVO av2 = new AddressVO(rs2.getString("AddressLine1"), rs2.getString("AddressLine2"), rs2.getString("City"),
+        		//							 rs2.getString("State"), rs2.getString("Country"), rs2.getString("Zip"));
         		//vb = new AgentVO(rs2.getString("AgentID"),nv2,rs2.getString("Email"),rs2.getString("PhoneNo"),av2);
         		vb = new AgentVO(rs2.getString("AgentID"));
         		break;
@@ -281,21 +281,25 @@ public class DBAPI {
 
 ////////////////////////////////////////////////update//////////////////////////////////////////////////////////
 	
-	synchronized public static void update(String tableName, VOBase vb){
+	synchronized public static boolean update(String tableName, VOBase vb){
 		switch(tableName){
 		case "view_customer":
 			CustomerVO vb_customer = (CustomerVO)vb;
 			delete(tableName,vb_customer.retrieveID().getID());
 			save(tableName,vb);
+			return true;
 		case "view_record":
 			RecordVO vb_record = (RecordVO)vb;
 			delete(tableName, vb_record.retrieveRecordID().getID());
 			save(tableName,vb);
+			return true;
 		case "view_agent":
 			AgentVO vb_agent = (AgentVO)vb;
 			delete(tableName,vb_agent.retrieveID().getID());
 			save(tableName,vb);
+			return true;
 		}
+		return false;
 	}
 	
 

@@ -31,7 +31,8 @@ public class CustomerDBAPI {
 	}
 	
 	//verify a customer from db
-	public static boolean verifyCustomer(String customerid){
+/*	public static boolean verifyCustomer(String customerid){
 		return DBAPI.verify(table, customerid);
 	}
+*/
 }

@@ -57,7 +57,7 @@ public class CustomerVO extends VOBase{
 		this.initiateID();
 	}
 	
-	//用已知id生成丄1�7个customer object，用于更斄1�7
+	//用已知id生成丄1�7个customer object，用于更斄1�7
 	public CustomerVO(String id){
 		this.myFacets = new HashMap<String , VOBase>();
 		IDVO customerID=new IDVO(id);
@@ -80,11 +80,11 @@ public class CustomerVO extends VOBase{
 		return CustomerDBAPI.updateCustomer(this);
 	}
 	
-	public boolean verifyCustomer(){
+/*	public boolean verifyCustomer(){
 		String id=this.retrieveID().payload;
 		return CustomerDBAPI.verifyCustomer(id);
 	}
-	
+*/	
 	public static boolean deleteCustomer(String id){
 		return CustomerDBAPI.deleteCustomer(id);
 	}
