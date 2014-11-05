@@ -1,5 +1,0 @@
-	email contact unable to translate
-	phone contact unable to translate
-	SMS contact unable to translate
-	mail contact unable to read
-	shouting contact rejected by guard

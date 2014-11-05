@@ -1,0 +1,8 @@
+aStreet	apt.1	Washington	DC	US	10027	30	101
+bStreet	apt.2	New Jersey	NY	US	10038	40	102
+sStreet	apt.3	New Jersey	NY	US	10038	10	103
+dStreet	apt.4	Washington	DC	US	38925	80	104
+fStreet	apt.5	New Jersey	NY	US	10038	20	105
+fStreet	apt.6	New York	NY	US	10027	70	106
+tStreet	apt.7	San Francisco	CA	US	48203	50	107
+hStreet	apt.8	New Jersey	NY	US	10038	60	108

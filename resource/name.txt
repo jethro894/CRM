@@ -1,6 +1,0 @@
-name.txt
-	Qin	Yue	Chen;
-	Wan	Qin	Feii;
-	Yin	Yin	hang;
-	Liu	Don	Xuer;
-	Lee	Shi	Yuer;
