@@ -12,7 +12,6 @@ create table Customer_Name(firstname VARCHAR(20), middlename VARCHAR(20), lastna
 create table Agent_Name(firstname VARCHAR(20), middlename VARCHAR(20), lastname VARCHAR(20),ANID varchar(150), AgentID varchar(150),PRIMARY KEY (AgentID,ANID),FOREIGN KEY(AgentID) REFERENCES Agent(AgentID) ON DELETE CASCADE);
 
 create table Record(RecordID varchar(150),TextSummary VARCHAR(20),Data VARCHAR(20),Type VARCHAR(20),Time VARCHAR(150),AgentID varchar(150),CustomerID varchar(150),PRIMARY KEY (CustomerID),FOREIGN KEY(AgentID) REFERENCES Agent(AgentID) ON DELETE CASCADE, FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID) ON DELETE CASCADE);
->>>>>>> yuechenqin
 
 load data local infile '~/Desktop/agent.txt' into table Agent lines terminated by '\n';
 load data local infile '~/Desktop/customer.txt' into table Customer lines terminated by '\n';
@@ -37,7 +36,6 @@ where customer.CustomerID = cname.CustomerID and customer.CustomerID = custadd.C
 create view view_record as 
 select record.CustomerID,record.AgentID,record.Type, record.Data, record.TextSummary, record.RecordID,record.Time
 from Record record,Agent agent, Customer customer
-
 where customer.CustomerID = record.CustomerID and agent.AgentID = record.AgentID;
 
 
@@ -53,4 +51,4 @@ where a.customerid = '10' and aa.customerid = a.customerid and an.customerid = a
 update Record r
 set r.TextSummary = 'Yinshenzuidiao',r.Data = 'data15',r.Type = 'voice', r.Time = '2015/1/1', r.agentId = '6'
 where r.RecordID = '3';
->>>>>>> yuechenqin
+
