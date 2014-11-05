@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="lib/aws-java-sdk-1.9.1.jar"/>
 	<classpathentry kind="lib" path="lib/javax.servlet-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/json-lib.jar"/>
-	<classpathentry kind="lib" path="/Users/Rachel/Downloads/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/Runxi/Downloads/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

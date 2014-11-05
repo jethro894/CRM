@@ -3,7 +3,7 @@ package com.crm.ass3;
 import java.util.List;
 
 public class RecordDBAPI {
-	private final static String table = "records";
+	private final static String table = "view_record";
 	
 	//given recordID, retrieve a recordVO
 	public static RecordVO retrieveRecord(String recordID){

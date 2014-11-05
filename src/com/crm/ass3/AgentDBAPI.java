@@ -3,7 +3,7 @@ package com.crm.ass3;
 import java.util.List;
 
 public class AgentDBAPI {
-	private final static String table = "agents";
+	private final static String table = "view_agent";
 	
 	//given agentID, retrieve a agentVO
 	public static AgentVO retrieveAgent(String agentID){
@@ -21,13 +21,13 @@ public class AgentDBAPI {
 	}
 	
 	//update a agentvo
-	public static void updateAgent(AgentVO av){
-		DBAPI.update(table, av);
+	public static boolean updateAgent(AgentVO av){
+		return DBAPI.update(table, av);
 	}
 	
 	//delete a agent from db
-	public static void deleteAgent(String agentID){
-		DBAPI.delete(table, agentID);
+	public static boolean deleteAgent(String agentID){
+		return DBAPI.delete(table, agentID);
 	}
 	
 	public static boolean verifyAgent(String agentID){
