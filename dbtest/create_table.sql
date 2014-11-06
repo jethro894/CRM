@@ -1,5 +1,6 @@
 create database dbtest;
 use dbtest;
+
 create table Agent(AgentID varchar(150),PhoneNo VARCHAR(20),Email VARCHAR(20), PRIMARY KEY (AgentID));
 create table Customer(CustomerID varchar(150),PhoneNo VARCHAR(20),Email VARCHAR(20), PRIMARY KEY (CustomerID));
 create table Customer_Address(AddressLine1 VARCHAR(20),AddressLine2 VARCHAR(20), City VARCHAR(20),State VARCHAR(20), Country VARCHAR(20), Zip VARCHAR(20), CustomerID varchar(150), CAID varchar(150),PRIMARY KEY (CustomerID,CAID), FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID) ON DELETE CASCADE);
@@ -50,3 +51,4 @@ where a.customerid = '10' and aa.customerid = a.customerid and an.customerid = a
 update Record r
 set r.TextSummary = 'Yinshenzuidiao',r.Data = 'data15',r.Type = 'voice', r.Time = '2015/1/1', r.agentId = '6'
 where r.RecordID = '3';
+

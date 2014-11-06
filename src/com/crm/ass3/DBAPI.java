@@ -1,5 +1,6 @@
 package com.crm.ass3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
@@ -116,7 +117,7 @@ public class DBAPI {
 	
 ///////////////////////////////////////////////////lookup//////////////////////////////////////////////////////
 
-	public static List<String> lookup(String tableName, String key){
+	/*public static List<String> lookup(String tableName, String key){
 		List<String> ids = null;
 
 		try {
@@ -165,6 +166,55 @@ public class DBAPI {
         		ids.add(rs.getString("TextSummary"));
         		ids.add(rs.getString("RecordID"));
         		ids.add(rs.getString("Time"));
+        		break;
+        }
+      
+      }
+      catch (Exception e) {
+        System.out.print("get data error!");
+        e.printStackTrace();
+      }
+		return ids;
+	}*/
+	
+	
+	public static List<String> lookup(String tableName, String key){
+		List<String> ids  = new ArrayList<String>();
+
+		try {
+       Class.forName("com.mysql.jdbc.Driver");     //加载MYSQL JDBC驱动程序   
+       System.out.println("Success loading Mysql Driver!");
+      }
+      catch (Exception e) {
+        System.out.print("Error loading Mysql Driver!");
+        e.printStackTrace();
+      }
+      try {
+        Connection connect = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/dbtest","root","wangqifeishabi");
+             //连接URL为   jdbc:mysql//服务器地址/数据库名  ，后面的2个参数分别是登陆用户名和密码
+
+        System.out.println("Success connect Mysql server!");
+        Statement stmt = connect.createStatement();
+        ResultSet rs;
+          switch(tableName){
+        	case "view_customer":
+        		
+        		rs = stmt.executeQuery("select * from view_customer where CustomerID =  \'" + key + "\' or firstname = \'" + key + "\' or middlename = \'" + key + "\' or lastname = \'" + key + "\' or Email = \'" + key +"\' or PhoneNo = \'" + key + "\' or AgentID = \'" + key +"\' or AddressLine1 = \'"+ key +"\' or Addressline2 = \'"+ key +"\' or AddressLine2 = \'"+ key +"\' or City =\'"+ key +"\' or State = \'"+ key +"\' or Country = \'"+ key+"\'" );		
+            	while(rs.next()){
+                	ids.add(rs.getString("CustomerID"));} 
+        		break;
+        	case "view_agent":
+        	    rs = stmt.executeQuery("select * from view_agent where AgentID =  \'" + key + "\' or firstname = \'" + key + "\' or middlename = \'" + key + "\' or lastname = \'" + key + "\' or Email = \'" + key +"\' or PhoneNo = \'" + key +"\' or AddressLine1 = \'"+ key +"\' or Addressline2 = \'"+ key +"\' or AddressLine2 = \'"+ key +"\' or City =\'"+ key +"\' or State = \'"+ key +"\' or Country = \'"+ key+"\'");
+        			
+            	while(rs.next()){
+                	ids.add(rs.getString("AgentID"));}
+         		break;
+        	case "view_record":
+        		rs = stmt.executeQuery("select * from view_record where CustomerID =  \'" + key + "\' or AgentID = \'" + key + "\' or recordID = \'" + key + "\' or Type = \'" + key + "\' or Data = \'" + key +"\' or Time = \'" + key + "\' or TextSummary = \'" + key +"\'" );
+    			
+            	while(rs.next()){
+                	ids.add(rs.getString("RecordID"));}
         		break;
         }
       

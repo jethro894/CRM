@@ -1,6 +1,0 @@
-01	totally useless	data1	Voice	03/23/2014	1	1
-02	cannot stand it	data2	email	09/12/2014	1	4
-03	totally failure	data3	voice	04/12/2013	2	5
-04	such bullshit	data4	text	02/30/2014	4	3
-05	stupid design	data5	text	03/12/2013	3	8
-06	get away damn	data6	voice	05/19/2013	6	7

@@ -11,8 +11,7 @@ public class RecordDBAPI {
 	}
 	
 	//given agentID and customerID, return lists of recordID
-	public static List<String> lookupRecord(String customerID, String agentID){
-		String key = customerID + ":" + agentID;
+	public static List<String> lookupRecord(String key){
 		return DBAPI.lookup(table, key);
 	}
 	
