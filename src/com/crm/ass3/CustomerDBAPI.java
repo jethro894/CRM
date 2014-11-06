@@ -3,7 +3,7 @@ package com.crm.ass3;
 import java.util.List;
 
 public class CustomerDBAPI {
-	private final static String table = "customers";
+	private final static String table = "view_customer";
 	
 	//given customerID, retrieve a customerVO
 	public static CustomerVO retrieveCustomer(String customerID){
@@ -31,7 +31,8 @@ public class CustomerDBAPI {
 	}
 	
 	//verify a customer from db
-	public static boolean verifyCustomer(String customerid){
+/*	public static boolean verifyCustomer(String customerid){
 		return DBAPI.verify(table, customerid);
 	}
+*/
 }

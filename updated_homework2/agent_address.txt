@@ -1,8 +1,0 @@
-	AStreet	apt.1	Washington	DC	US	10027
-	BStreet	apt.2	New Jersey	NY	US	10038
-	SStreet	apt.3	New Jersey	NY	US	10038
-	DStreet	apt.4	Washington	DC	US	38925
-	CStreet	apt.5	New Jersey	NY	US	10038
-	FStreet	apt.6	New York	NY	US	10027
-	TStreet	apt.7	San Francisco	CA	US	48203
-	GStreet	apt.8	New Jersey	NY	US	10038

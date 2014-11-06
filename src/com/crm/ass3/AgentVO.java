@@ -46,10 +46,8 @@ public class AgentVO extends VOBase{
 	}
 	
 	protected List<String> lookup(String key){
-		String agentID = this.retrieveID().getID();
-		List<String> candidateIDs = null;
-		///
-		return candidateIDs;
+		//String agentID = this.retrieveID().getID();
+		return AgentDBAPI.lookupAgent(key);
 	}
 	
 /*	public List<VOBase> ambiguousLookupResult(String key){

@@ -3,7 +3,7 @@ package com.crm.ass3;
 import java.util.List;
 
 public class RecordDBAPI {
-	private final static String table = "records";
+	private final static String table = "view_record";
 	
 	//given recordID, retrieve a recordVO
 	public static RecordVO retrieveRecord(String recordID){
@@ -11,8 +11,7 @@ public class RecordDBAPI {
 	}
 	
 	//given agentID and customerID, return lists of recordID
-	public static List<String> lookupRecord(String customerID, String agentID){
-		String key = customerID + ":" + agentID;
+	public static List<String> lookupRecord(String key){
 		return DBAPI.lookup(table, key);
 	}
 	

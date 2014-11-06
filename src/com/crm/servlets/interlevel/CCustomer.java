@@ -16,10 +16,10 @@ public class CCustomer {
 			return null;
 	}
 	
-	//更新customer之前先验证agentid是否存在,是否和customer的agentid符合，�1�7�虑到是先搜索再更新，所以无霄1�7验证customer
+	//更新customer之前先验证agentid是否存在,是否和customer的agentid符合，�1�7�虑到是先搜索再更新，所以无霄1�7验证customer
 	public static boolean updateCustomer(JSONObject customer){
 		boolean success=false;
-		//1.verify if new agent exist 畄1�7
+		//1.verify if new agent exist 畄1�7
 		//2.verify if original agent match the customer record:
 		//搜索customerid对应的agentid
 		//CustomerVO customervo= CustomerVO.retrieveCustomerVO(customer.getString("id"));
@@ -53,11 +53,12 @@ public class CCustomer {
 	
 	//create customer前需要先验证
 	public static String createCustomer(JSONObject customer){
-		//新建丄1�7个customervo，自动生成id
+		//新建丄1�7个customervo，自动生成id
 		CustomerVO customervo=new CustomerVO();
 		//验证该customer是否存在
 		String customerresult = "null";
-		if(customervo.verifyCustomer())
+		//if(customervo.verifyCustomer())
+		if(true)
 			customerresult = "null";
 			//customerresult="customer already exist";
 		//验证agent是否存在;
@@ -76,7 +77,7 @@ public class CCustomer {
 					customer.getString("country"),
 					customer.getString("zipCode"));
 			
-			//是否霄1�7要存丄1�7个之前的旧�1�7�，然后比较之后再更新？
+			//是否霄1�7要存丄1�7个之前的旧�1�7�，然后比较之后再更新？
 			//customervo object attribute update
 			//customervo.setAddress(a);
 			customervo.setAgentID(agentID);
@@ -84,7 +85,7 @@ public class CCustomer {
 			customervo.setName(name);
 			customervo.setPhoneNo(phone);
 			customervo.setAddress(address);
-			//database create api到底是调甄1�7
+			//database create api到底是调甄1�7
 			customerresult=customervo.saveCustomer();
 			}
 		else

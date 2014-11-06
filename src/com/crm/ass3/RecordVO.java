@@ -55,19 +55,28 @@ public class RecordVO extends VOBase{
 	
 	public void setTextSummary(TextVO t){ this.createFacet(default_facet[4], (VOBase)t);}
 	
-	//创建record甄1�7
+	//创建record甄1�7
 	public RecordVO(){
 		this.myFacets = new HashMap<String , VOBase>();
 		this.initiateID();
 		this.initiateTime();
 	}
 	
-	//更新record甄1�7
+	//更新record甄1�7
 	public RecordVO(String recordid){
 		this.myFacets = new HashMap<String , VOBase>();
 		IDVO recordID=new IDVO(recordid);
-		this.createFacet(default_facet[5], recordID);
+		this.createFacet(default_facet[5], (VOBase)recordID);
 		this.initiateTime();//修改时间
+	}
+	
+	public RecordVO(String id, String time){
+		this.myFacets = new HashMap<String , VOBase>();
+		IDVO recordID=new IDVO(id);
+		this.createFacet(default_facet[5], (VOBase)recordID);
+		
+		TimeVO timevo = new TimeVO(time);
+		this.createFacet(default_facet[6], (VOBase)timevo);
 	}
 	
 	//更新record
