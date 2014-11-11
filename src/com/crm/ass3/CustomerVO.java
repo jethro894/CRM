@@ -7,7 +7,6 @@ import com.crm.ass3.rmq.Emitter;
 
 import net.sf.json.JSONObject;
 
-
 public class CustomerVO extends VOBase{
 	protected final String[] default_facet = {"ID", "Name", "Email", "PhoneNo", "AgentID", "Address"};
 	

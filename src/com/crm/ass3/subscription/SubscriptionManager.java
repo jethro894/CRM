@@ -9,12 +9,12 @@ public class SubscriptionManager {
 	//Singleton pattern
 	private static volatile SubscriptionManager instance = null;
 	
-	ExecutorService executor;
 	List<SubscriptionVO> subs;
+	List<Thread> threads;
 	
 	private SubscriptionManager(){
 		this.subs = new ArrayList<SubscriptionVO>();
-		this.executor = Executors.newCachedThreadPool();
+		this.threads = new ArrayList<Thread>();
 	}
 	
 	synchronized public static SubscriptionManager getSubscriptionManager(){
@@ -23,16 +23,34 @@ public class SubscriptionManager {
 		return instance;
 	}
 	
-	public void addSubscription(SubscriptionVO s){
-		synchronized(this){
-			s.createSubscription();
-			subs.add(s);
+	synchronized public void addSubscription(SubscriptionVO s){
+		s.createSubscription();
+		subs.add(s);
+		Thread t = new Thread(s);
+		threads.add(t);
+		threads.get(threads.size()-1).start();
+	}
+	
+	synchronized public void stopSubscription(String subscription_id){
+		int i = -1;
+		for(int j = 0; j < subs.size(); j++){
+			if(subs.get(j).getSubscriptionID().getID().equals(subscription_id)){
+				i = j;
+				break;
+			}
 		}
-		executor.execute(s);
+		threads.get(i).interrupt();
+		
+		subs.remove(i);
+		threads.remove(i);
+		
+		SubscriptionVO.deleteSubscription(subscription_id);
 	}
 	
 	public void forceTerminate(){
 		subs.clear();
-		executor.shutdownNow();
+		for(Thread t : threads){
+			t.interrupt();
+		}
 	}
 }
