@@ -5,12 +5,17 @@
 </div>
 
 <p style="text-align:center">
-    <button class="btn btn-info btn-lg" ng-click="CP_searchUser(CP_id_to_search); searchComplete=true">
+    <button class="btn btn-info btn-lg" ng-click="userSearchUser(CP_id_to_search); searchComplete=true">
         <span class="glyphicon glyphicon-search"></span> Search!
     </button>
-</p><hr>
-<!--<div ng-show="CP_searchComplete">-->
-<div ng-show="searchComplete">
+
+	{{users}}
+    <div ng-show="errorShow">
+        {{errorMessage}}
+    </div>
+
+<hr>
+<div ng-show="userSearchComplete">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -21,25 +26,26 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Telephone</th>
+            <th>Address</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="x in users">
+        <tr>
             <td>
-                <!--<button class="btn" ng-click="CP_updateCustomerWanted(x.cid)">-->
-                <button class="btn btn-link" ng-click="updateCustomerWanted(x.cid)">
+                <button class="btn btn-link" ng-click="userUpdateUserWanted(users.customerID, users.agentID)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
                 </button>
             </td>
-            <td>{{ x.cid }}</td>
-            <td>{{ x.aid }}</td>
-            <td>{{ x.fName }}</td>
-            <td>{{ x.lName }}</td>
-            <td>{{ x.email }}</td>
-            <td>{{ x.tel }}</td>
+            <td>{{ users.customerID }}</td>
+            <td>{{ users.agentID }}</td>
+            <td>{{ users.firstName }}</td>
+            <td>{{ users.lastName }}</td>
+            <td>{{ users.customerEmail }}</td>
+            <td>{{ users.customerPhone }}</td>
+            <td>{{ users.customerAddress.AddressLine1 + ", " + users.customerAddress.AddressLine2 + ", " + users.customerAddress.City + ", " + users.customerAddress.State + ", " + users.customerAddress.Country + ", " + users.customerAddress.ZipCode}}</td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<div ng-show="updateCustomerShow" ng-include="'customerUpdater.html'"></div>
+<div ng-show="u2uUpdateShow" ng-include="'CP_customerUpdater.html'"></div>

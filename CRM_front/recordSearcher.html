@@ -6,32 +6,38 @@
         <button class="btn btn-default" ng-click="searchRecord(record_id_to_search)">
             <span class="glyphicon glyphicon-th-list"></span> Search!
         </button>
+        {{errorMessage}}
     </p><hr></div>
+
 </div>
-<div ng-show="searchRecordComplete">
+<div ng-show="searchRecordComplete" class="container">
+	<p>records echo: {{records}}</p>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Edit</th>
             <th>Record ID</th>
+            <th>Record Time</th>
             <th>Customer ID</th>
-            <th>Data</th>
-            <th>Type</th>
+            <th>Contact Data</th>
+            <th>Contact Type</th>
             <th>Text Summary</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="x in records">
+       <!--<tr ng-repeat="x in records">-->
+       <tr>
             <td>
-                <button class="btn" ng-click="updateRecordWanted(x.rid)">
+                <button class="btn" ng-click="updateRecordWanted(records.RecordID)">
                     <span class="glyphicon glyphicon-pencil"></span> Update
                 </button>
             </td>
-            <td>{{ x.rid }}</td>
-            <td>{{ x.cid }}</td>
-            <td>{{ x.data }}</td>
-            <td>{{ x.type }}</td>
-            <td>{{ x.text }}</td>
+            <td>{{ records.RecordID }}</td>
+            <td>{{ records.RecordTime }}</td>
+            <td>{{ records.customerID }}</td>
+            <td>{{ records.contactData }}</td>
+            <td>{{ records.contactType }}</td>
+            <td>{{ records.TextSummary}}</td>
         </tr>
         </tbody>
     </table>

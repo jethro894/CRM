@@ -1,12 +1,16 @@
 <p style="text-align:center">
-    <button class="btn btn-link" ng-click="wannaCreateRecord=true; wannaSearchRecord=false; createRecordWanted()">
+    <button class="btn btn-link" ng-click="wannaCreateRecord=true; wannaSearchRecord=false; wannaDeleteRecord=false; resetMessage(); createRecordWanted()">
         <span class="glyphicon glyphicon-pencil"></span> Create Record
     </button>
 
-    <button class="btn btn-link" ng-click="wannaSearchRecord=true; wannaCreateRecord=false; resetSearchRecord()">
+    <button class="btn btn-link" ng-click="wannaSearchRecord=true; wannaCreateRecord=false; wannaDeleteRecord=false; resetMessage(); resetSearchRecord()">
         <span class="glyphicon glyphicon-search"></span> Search Record
+    </button>
+    <button class="btn btn-link" ng-click="wannaDeleteRecord=true; wannaSearchRecord=false; wannaCreateRecord=false; resetMessage()">
+        <span class="glyphicon glyphicon-flash"></span> Delete Record
     </button>
 </p>
 
 <div ng-show="wannaSearchRecord" ng-include="'recordSearcher.html'"></div>
 <div ng-show="wannaCreateRecord" ng-include="'recordCreator.html'"></div>
+<div ng-show="wannaDeleteRecord" ng-include="'recordDeleter.html'"></div>

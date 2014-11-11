@@ -1,14 +1,15 @@
-<div style="background-color: lavender;">
-    <br>
+<div style="background-color: lavender;"><br>
 <h4 style="text-align:center">Search Customer</h4>
 <p style="text-align:center">
     <input type="text" ng-model="id_to_search" size="35" placeholder="Please enter customer ID here..."><br><br>
-    <button class="btn btn-default" ng-click="searchUser(id_to_search)">
+    <button class="btn btn-default" ng-click="searchUser(id_to_search); resetMessage()">
         <span class="glyphicon glyphicon-user"></span> Search!
     </button>
 </p><br>
+    <p style="text-align: center">{{errorMessage}}</p>
 </div>
-
+{{address}}
+{{address.AddressLine1}}
 <div ng-show="searchComplete">
     <hr>
     <table class="table table-striped">
@@ -21,21 +22,24 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Telephone</th>
+            <th>Address</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="x in users">
+        <!--<tr ng-repeat="x in users">-->
+        <tr>
             <td>
-                <button class="btn" ng-click="updateCustomerWanted(x.cid)">
+                <button class="btn" ng-click="updateCustomerWanted(users.customerID); resetMessage()">
                     <span class="glyphicon glyphicon-pencil"></span>  Update
                 </button>
             </td>
-            <td>{{ x.cid }}</td>
-            <td>{{ x.aid }}</td>
-            <td>{{ x.fName }}</td>
-            <td>{{ x.lName }}</td>
-            <td>{{ x.email }}</td>
-            <td>{{ x.tel }}</td>
+            <td>{{ users.customerID }}</td>
+            <td>{{ users.agentID }}</td>
+            <td>{{ users.firstName }}</td>
+            <td>{{ users.lastName }}</td>
+            <td>{{ users.customerEmail }}</td>
+            <td>{{ users.customerPhone }}</td>
+            <td>{{ address.AddressLine1 + ", " + address.AddressLine2 + ", " + address.City + ", " + address.State + ", " + address.Country + ", " + address.ZipCode}}</td>
         </tr>
         </tbody>
     </table>

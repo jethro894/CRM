@@ -21,14 +21,12 @@
 </div>
     <br>
     <div ng-show="showReLogin" style="text-align: right">
-        <!--&nbsp;&nbsp;&nbsp;-->
         <button class="btn btn-default btn-sm" ng-click="hideAfterLogIn=true; showCP=false; showAP=false">
             <span class="glyphicon glyphicon-home"></span> Login Using Another Account?
         </button>&nbsp;&nbsp;&nbsp;
     </div>
     <div ng-show="showCP" ng-include="'_customer.html'"></div>
     <div ng-show="showAP" ng-include="'_agent.html'"></div>
-
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 <script src="myApp.js"></script>
 <script src="myController.js"></script>

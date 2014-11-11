@@ -1,0 +1,137 @@
+<div>
+    <hr>
+    <form class="form-horizontal" role="form">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Customer ID: </label>
+                <input type="text" style="width:400px;margin:0;" class="form-control" ng-model="u2uUserID" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">First Name: </label>
+                <input type="text" style="width:400px;margin:0;" class="form-control" ng-model="new.fName" placeholder="first name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Last Name: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.lName" placeholder="last name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Email: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.email" placeholder="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Telephone: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.tel" placeholder="tel">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Address Line 1: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.addressLine1" placeholder="address line 1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Address Line 2: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.addressLine2" placeholder="address line 2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">City: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.city" placeholder="city">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">State: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.state" placeholder="state">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Country: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.country" placeholder="country">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Zip Code: </label>
+                <input type="text" style="width:200px;margin:0;" class="form-control" ng-model="new.zipCode" placeholder="zip code">
+            </div>
+        </div>
+    </form>
+    <p style="text-align:center">
+        <button class="btn btn-success" ng-click="userUpdateUser(u2uUserID, u2uAgentID, new)">
+            <span class="glyphicon glyphicon-ok"></span> Submit
+        </button>
+    </p>
+</div>
+<hr>
+<div ng-show="testCustomer" class="jumbotron">
+    <h4 style="text-align:center"> Update Submitted!</h4>
+    <div style="background-color: lavender;">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Agent ID
+                </th>
+                <th>
+                    Customer ID
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Telephone
+                </th>
+                <th>Address
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>
+                    {{u2uAgentID}}
+                </td>
+                <td>
+                    {{u2uUserID}}
+                </td>
+                <td>
+                    {{new.fName}}
+                </td>
+                <td>
+                    {{new.lName}}
+                </td>
+                <td>
+                    {{new.email}}
+                </td>
+                <td>
+                    {{new.tel}}
+                </td>
+                <td>
+                    {{new.addressLine1+", "+new.addressLine2+", "+new.city+", "+new.state+", "+new.country+", "+new.zipCode}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+</div>
+
+<p style="text-align: center">{{Message}}</p>

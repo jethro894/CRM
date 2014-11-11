@@ -1,0 +1,50 @@
+<h1>agent to subscription</h1>
+
+<h2>create:</h2>
+
+<p>post /CRMbyJAX-RS/CRM/Agent/CreateSubscription</p>
+
+<h3>client side</h3>
+
+<p>agentID, zipCode, notificationType(email/sms)</p>
+
+<h3>server side</h3>
+
+<p>subscription ID</p>
+
+<h2>search</h2>
+
+<p>post /CRMbyJAX-RS/CRM/Agent/RetrieveSubscription</p>
+
+<h3>client side</h3>
+
+<p>subscriptionID/agentID/zipCode/notificationType</p>
+
+<h3>server side</h3>
+
+<p>subscriptionID, agentID, zipCode, notificationType</p>
+
+<h2>update</h2>
+
+<p>post  /CRMbyJAX-RS/CRM/Agent/UpdateSubscription</p>
+
+<h3>client side</h3>
+
+<p>subscriptionID(? readonly), agentID, zipCode, notificationType</p>
+
+<h3>server side</h3>
+
+<p>boolean as data.success</p>
+
+<h2>delete</h2>
+
+<p>get /CRMbyJAX-RS/CRM/Agent/DeleteSubscription</p>
+
+<h3>client side</h3>
+
+<p>subscriptionID</p>
+
+<h3>server side</h3>
+
+<p>boolean as data.success</p>
+

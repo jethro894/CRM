@@ -3,96 +3,201 @@
  */
 app.controller("myController", function($scope,$http){
 
-    $scope.users=[
-        {cid:1, aid:10, fName:'Hege',  lName:'Pege', email: 'dl2856@columbia.edu',tel:'646-388-1809'},
-        {cid:2, aid:11, fName:'Kim',   lName:'Pim', email: 'hl2788@columbia.edu',  tel:'389-789-1235'},
-        {cid:3, aid:12, fName:'Sal',   lName:'Smith',email: 'wx2799@columbia.edu', tel:'672-213-2342'},
-        {cid:4, aid:13, fName:'Jack',  lName:'Jones', email: 'rl2178@columbia.edu', tel:'656-432-9472'},
-        {cid:5, aid:14, fName:'John',  lName:'Doe', email: 'qq0987@columbia.edu',tel:'213-876-5148'},
-        {cid:6, aid:15, fName:'Peter', lName:'Pan', email: 'pp2176@columbia.edu', tel:'895-213-6826'}
-    ];
-    $scope.records=[
-        {rid:11, cid:1, data:'11min13s', type:'Telephone', text:'Item easy to broken'},
-        {rid:12, cid:2, data:'00min23s', type:'Telephone', text:'Not what the customer wants'},
-        {rid:13, cid:3, data:'43min00s', type:'Telephone', text:'Bad quality'},
-        {rid:14, cid:4, data:'01min37s', type:'Telephone', text:'Customer does not like it'},
-        {rid:15, cid:5, data:'34lines', type:'E-mail', text:'Do not need it anymore'},
-        {rid:16, cid:6, data:'04min15s', type:'Telephone', text:'Not as described'},
-        {rid:17, cid:7, data:'07min21s', type:'Telephone', text:'Arrive too late'},
-    ];
-
-
-
-
+    /*global variables*/
     $scope.agentID = "";
     $scope.agentVerified = false;
     $scope.error_message = "";
-//  验证agent ID
+
+    /*returned info*/
+    $scope.users={};
+    $scope.records={};
+
+    /*customer to  customer*/
+    /*search customer*/
+    $scope.errorMessage="";
+    $scope.errorShow=false;
+    $scope.userSearchUser=function(user_id){
+    	//$scope.users={};
+        var config={params:{userID:user_id}};
+        var response=$http.get('/CRMbyJAX-RS/CRM/Customer/RetrieveCustomer', config);
+        response.success(function(data,statuc,headers,config){
+        	$scope.users=data;
+            if(data.customerID==null){
+                $scope.errorMessage="No such customer...";
+                $scope.errorShow=true;
+            }else{
+                $scope.errorShow=false;
+                $scope.errorMessage="";
+                $scope.users=data;
+                $scope.userSearchComplete = true;
+            }
+        });
+    };
+    $scope.u2uUpdateShow=false;
+    /*pre-update customer */
+    $scope.userUpdateUserWanted=function(user_id, agent_id){
+        $scope.u2uUserID=user_id;
+        $scope.u2uAgentID=agent_id;
+        $scope.u2uUpdateShow=true;
+    };
+    
+    /*update customer*/
+    $scope.userUpdateUser=function(user_id, agent_id, attribute){
+    	$scope.data1={};
+        $scope.data1.customerID=user_id;
+        $scope.data1.agentID=agent_id;
+        $scope.data1.fName=attribute.fName;
+        $scope.data1.lName=attribute.lName;
+        $scope.data1.email=attribute.email;
+        $scope.data1.tel=attribute.tel;
+        $scope.data1.addressLine1=attribute.addressLine1;
+        $scope.data1.addressLine2=attribute.addressLine2;
+        $scope.data1.city=attribute.city;
+        $scope.data1.state=attribute.state;
+        $scope.data1.country=attribute.country;
+        $scope.data1.zipCode=attribute.zipCode;
+        var data=$scope.data1;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Customer/UpdateCustomer",data);
+        response.success(function(data, status, headers, config) {
+            if(data.success==true){
+                $scope.Message="Update succeeded!";
+                $scope.testCustomer=true;
+            }else if(data.success==false){
+                $scope.Message="Update failed, please try again...";
+            }
+            else{
+                $scope.Message="Update failed, please try again...";
+            }
+        });
+    };
+    /*agent to agent*/
+    /*verify agentID*/
     $scope.verify = function(agent_id){
         $scope.agentID = agent_id;
-
-
-
-        // 用post方法返回agent_id给server, 通过authentication进行验证
-        // 返回值(true/false)传给agentVerified
-        // error message 传给error_message
-        $scope.agentVerified = true;
-        $scope.error_message = "no error";
+        var config={params:{agentID:$scope.agentID}};
+        var response=$http.get('/CRMbyJAX-RS/CRM/Agent/AgentLogin',config);
+        response.success(function(data, status, headers, config) {
+        	var ifexist=data;
+            if(ifexist.success){$scope.error_message = "";}
+            else{$scope.error_message="Agent ID does not exist, please try again...";}
+            $scope.agentVerified = data;
+        });
+        /*response.error(function(data, status, headers, config) {
+            $scope.agentVerified = false;
+            $scope.error_message = "no such agent";
+        });*/
     };
-// record management
+    /*agent to customer*/
+    /*record management*/
     $scope.recordID="";
     $scope.testRecord=false;
     $scope.searchRecordComplete=false;
     $scope.updateRecordShow= false;
     $scope.recordIDToBeUpdated = "";
     $scope.recordIDToBeSearched = "";
-    $scope.thingsToSubmit="";
-
+    //$scope.thingsToSubmit="";
+    $scope.resetMessage=function(){
+    	$scope.errorMessage="";
+    };
+    
     $scope.resetSearchRecord=function(){
         $scope.testRecord=false;
         $scope.searchRecordComplete=false;
         $scope.updateRecordShow= false;
         $scope.recordIDToBeUpdated = "";
         $scope.RecordIDToBeSearched = "";
-    }
+    };
+
+    /*create record*/
+
+    $scope.recordInfo={};
+    $scope.createRecordWanted=function(){
+        $scope.recordID="";
+    };
+    $scope.createRecord = function(agent_id, attributes){
+        //$scope.errorMessage="";
+        $scope.recordInfo.agentID=agent_id;
+        $scope.recordInfo.customerID=attributes.customerID;
+        $scope.recordInfo.contactType=attributes.contactType;
+        $scope.recordInfo.contactData=attributes.contactData;
+        $scope.recordInfo.TextSummary=attributes.TextSummary;
+        var data = $scope.recordInfo;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/CreateRecord",data);
+        response.success(function(data, status, headers, config) {
+        	$scope.records=data;
+            if(data.RecordID==null){
+                $scope.errorMessage="Create Failed! Customer ID or Agent ID does not exist!";
+            }else{
+                $scope.errorMessage="Create Successfully";
+                //$scope.RecordID=data.RecordID;
+                //$scope.RecordTime=data.RecordID;
+            }
+            $scope.testRecord=true;
+        });
+    };
+    /*search record*/
     $scope.searchRecord=function(record_id){
-        // code goes here
-
-
-
-
-        // 把record id post 过去, 取回来一个record值
+    	$scope.searchRecordComplete=true;
+        $scope.errorMessage="";
         $scope.recordIDToBeSearched=record_id;
-        $scope.searchRecordComplete=true;
-    }
+        var config={params:{recordID:record_id}};
+        var response=$http.get("/CRMbyJAX-RS/CRM/Agent/RetrieveRecord", config);
+        response.success(function(data,status,headers,config){
+            if(data.RecordID==null){
+                $scope.searchRecordComplete=false;
+                $scope.errorMessage="No such record...";
+            }else{
+                $scope.searchRecordComplete=true;
+                $scope.errorMessage="";
+                $scope.records=data; 
+            }
+        });
+    };
+    /*update record*/
     $scope.updateRecordWanted = function(record_id){
         $scope.updateRecordShow= true;
         $scope.recordIDToBeUpdated = record_id;
     };
-    $scope.createRecordWanted=function(){
-        // code goes here
-
-
-
-
-        // 需要从服务器取回一个分配的recordID
-        // 不需要传递agentID
-        $scope.recordID="456";
-    }
-// 创建record
-    $scope.createRecord = function(record_id, attributes){
-        // code goes here
-
-
-
-
-        //需要传递 attribute和record_id
-        $scope.thingsToSubmit = attributes;
-        // 需要把create 的record的值用post 传给server
-        $scope.testRecord=true;
+    $scope.updateRecord=function(record_id, agent_id, attributes){
+        $scope.errorMessage="";
+        $scope.recordInfo={};
+        $scope.recordInfo.RecordID=record_id;
+        $scope.recordInfo.customerID=attributes.customerID;
+        $scope.recordInfo.agentID=agent_id;
+        $scope.recordInfo.contactType=attributes.contactType;
+        $scope.recordInfo.contactData=attributes.contactData;
+        $scope.recordInfo.TextSummary=attributes.TextSummary;
+        var data=$scope.recordInfo;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/UpdateRecord",data);
+        response.success(function(data, status, headers, config) {
+        	$scope.myRecord=data;
+            if(data.RecordID==null){
+                $scope.errorMessage="Create Failed! Customer ID or Agent ID does not exist!";
+            }else{
+                $scope.errorMessage="Create Successfully";
+            }
+            $scope.testRecord=true;
+        });
+    };
+    /*delete record*/
+    $scope.deleteRecord=function(record_id){
+        $scope.errorMessage="";
+        var config={params:{recordID:record_id}};
+        var response=$http.get("/CRMbyJAX-RS/CRM/Agent/DeleteRecord", config);
+        response.success(function(data,status,headers,config){
+            var r=data;
+        	if(r.success==false){
+                $scope.errorMessage="No such record...";
+            }else if(r.success==true){
+            	$scope.errorMessage="Delete succeeded!";
+                //$scope.errorMessage="";
+            }else{
+            	$scope.errorMessage="ERROR";
+            }
+        });
     };
 
-// customer management
+    /*customer management*/
     $scope.testCustomer = false;
     $scope.searchComplete = false;
     $scope.updateCustomerShow= false;
@@ -105,56 +210,181 @@ app.controller("myController", function($scope,$http){
         $scope.updateCustomerShow= false;
         $scope.userIDToBeUpdated = "";
         $scope.userIDToBeSearched = "";
-    }
+    };    
     $scope.searchUser = function(user_id){
+    	//alert(user_id);
+        $scope.errorMessage="";
         $scope.userIDToBeSearched = user_id;
-        // code goes here
-
-
-
-
-
-
-        // 要将agentID和userIDToBeSearched一起回传，确定有权限的情况下才能够返回信息，否则
-        // 报error
-        // 返回来的信息存在users里
-        ///unused! $scope.agentID = agent_id || 0;
-        ///$scope.agentID = (typeof agent_id === "undefined") ? "0" : agent_id;
-        // 需要用get方法返回customer的数据, 传入user中
-//        $http.get("http://www.w3schools.com/website/Customers_JSON.php")
-//            .success(function(response) {$scope.users = response;});
-        $scope.searchComplete = true;
+        var config={params:{userID:user_id}};
+        //var data=user_id;
+        var response=$http.get("/CRMbyJAX-RS/CRM/Agent/RetrieveCustomer",config);
+        //var response=$http.post("CRM/Agent/RetrieveCustomer",data);
+        //alert("test1");
+        response.success(function(data,status,headers,config){
+            $scope.users=data;
+            $scope.address=data.customerAddress;
+            if(data.customerID==null){
+                $scope.errorMessage="No such user, please try again...";
+            }else{
+                $scope.errorMessage="";
+                $scope.searchComplete = true;
+            }
+        });
     };
     $scope.updateCustomerWanted = function(user_id){
         $scope.updateCustomerShow= true;
         $scope.userIDToBeUpdated = user_id;
     };
-    $scope.createCustomerWanted=function(){
-        // code goes here...
-
-
-
-
-        // 此处需要将 agentID 传回至服务器， 与userID 共同存入表中
-        $scope.userIDToBeCreated= 123;
-        //        此处需要向服务器发回一个请求取回userID
-        //        $scope.createCustomerShow=true;
-    }
     $scope.updateUser = function(agent_id, user_id, attributes){
-        // code goes here...
-
-
-
-
-
-        // agent_id, user_id也要传过去
-        // userIDToBeUpdate就是user_id
-        $scope.CustomerToSubmit=attributes;
-        // 把update的record的值用post传给server
-//        $scope.newName = attributes.Name;
-//        $scope.newCountry = attributes.Country;
-        $scope.testCustomer = true;
+        $scope.errorMessage="";
+        $scope.newCustomerInfo={};
+        $scope.newCustomerInfo.agentID=agent_id;
+        $scope.newCustomerInfo.customerID=user_id;
+        $scope.newCustomerInfo.fName=attributes.fName;
+        $scope.newCustomerInfo.lName=attributes.lName;
+        $scope.newCustomerInfo.email=attributes.email;
+        $scope.newCustomerInfo.tel=attributes.tel;
+        $scope.newCustomerInfo.addressLine1=attributes.addressLine1;
+        $scope.newCustomerInfo.addressLine2=attributes.addressLine2;
+        $scope.newCustomerInfo.city=attributes.city;
+        $scope.newCustomerInfo.state=attributes.state;
+        $scope.newCustomerInfo.country=attributes.country;
+        $scope.newCustomerInfo.zipCode=attributes.zipCode;
+        var data=$scope.newCustomerInfo;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/UpdateCustomer",data);
+        response.success(function(data,status,headers,config){
+           if(data.success==true){
+               $scope.errorMessage3="";
+               $scope.testCustomer = true;
+           }else if(data.success==false){
+               $scope.errorMessage3="Sorry, update failed, please try again...";
+           }
+           else{
+               $scope.errorMessage3="Sorry, update failed, please try again...";
+           }
+        });
     };
-
+    $scope.createCustomerWanted=function(){
+        $scope.userIDToBeCreated= "";
+    };
+    $scope.createUser=function(agent_id, attributes){
+        $scope.errorMessage="";
+        $scope.customerInfo={};
+        $scope.customerInfo.agentID=agent_id;
+        $scope.customerInfo.fName=attributes.fName;
+        $scope.customerInfo.lName=attributes.lName;
+        $scope.customerInfo.email=attributes.email;
+        $scope.customerInfo.tel=attributes.tel;
+        $scope.customerInfo.addressLine1=attributes.addressLine1;
+        $scope.customerInfo.addressLine2=attributes.addressLine2;
+        $scope.customerInfo.city=attributes.city;
+        $scope.customerInfo.state=attributes.state;
+        $scope.customerInfo.country=attributes.country;
+        $scope.customerInfo.zipCode=attributes.zipCode;
+        var data=$scope.customerInfo;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/CreateCustomer",data);
+        response.success(function(data, status, headers, config) {
+            $scope.userIDToBeCreated=data;
+            if(data.customerID=null){
+                $scope.errorMessage="Creation failed, please try again...";
+            }else{
+                $scope.errorMessage="Creation Successfully";
+            }
+            $scope.testCustomer2=true;
+        });
+    };
+    $scope.deleteCustomer=function(user_id){
+        $scope.errorMessage="";
+        var config={params:{userID:user_id}};
+        var response=$http.get("/CRMbyJAX-RS/CRM/Agent/DeleteCustomer", config);
+        response.success(function(data,status,headers,config){
+        	var r=data;
+        	alert(data.success);
+            if(r.success==false){
+                $scope.errorMessage="Deletion failed, please try it again...";
+            }else if(r.success==true){
+                $scope.errorMessage="Deletion succeeded!";
+            }else{
+            	$scope.errorMessage=data.success;
+            }
+        });
+    };
+    $scope.createSub=function(attributes){
+        $scope.errorMessage="";
+        $scope.subscriptionInfo={};
+        $scope.subscriptionInfo.agentID=attributes.agentID;
+        $scope.subscriptionInfo.zipCode=attributes.zipCode;
+        $scope.subscriptionInfo.notificationType=attributes.notificationType;
+        var data=$scope.subscriptionInfo;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/CreateSubscription", data);
+        response.success(function(data,status,headers,config){
+            if(data==null){
+                $scope.errorMessage="sorry, creation failed, please try again...";
+            }else{
+                $scope.errorMessage="";
+                $scope.subscriptionID = data;
+                $scope.createSubscriptionShow=true;
+            }
+        });
+    };
+    $scope.searchSub=function(attributes){
+//        $scope.subscriptionSet=[];
+        $scope.errorMessage="";
+        $scope.subscriptionInfo2={};
+        $scope.subscriptionInfo2.subscriptionID=attributes.subscriptionID;
+        $scope.subscriptionInfo2.agentID=attributes.agentID;
+        $scope.subscriptionInfo2.zipCode=attributes.zipCode;
+        $scope.subscriptionInfo2.notificationType=attributes.notificationType;
+        var data=$scope.subscriptionInfo2;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/RetrieveSubscription",data);
+        response.success(function(data,status,headers,config){
+            if(data.length==0){
+                $scope.errorMessage="No such record, please try again...";
+            }else{
+                $scope.errorMessage="";
+            }
+        });
+    };
+    $scope.updateSubPre=function(s_id){
+        $scope.sIDUpdated=s_id;
+    };
+//    $scope.deleteSubPre=function(s_id){
+//        $scope.sIDDeleted=s_id;
+//    };
+    $scope.updateSub=function(attributes){
+        $scope.subInfo3={};
+        $scope.subInfo3.subscriptionID=$scope.sIDUpdated;
+        $scope.subInfo3.agentID=attributes.agentID;
+        $scope.subInfo3.zipCode=attributes.zipCode;
+        $scope.subInfo3.notificationType=attributes.notificationType;
+        var data=$scope.subInfo3;
+        var response=$http.post("/CRMbyJAX-RS/CRM/Agent/UpdateSubscription",data);
+        response.success(function(data,status,headers,config){
+            if(data.success==true){
+                $scope.errorMessage="update succeeded!";
+            }else if(data.success==false){
+                $scope.errorMessage="update failed";
+            }else{
+                $scope.errorMessage="ERROR";
+            }
+        });
+    };
+    $scope.deleteSub=function(s_id){
+        $scope.errorMessage="";
+        var config={params:{subscriptionID:s_id}};
+        var response=$http.get("/CRMbyJAX-RS/CRM/Agent/DeleteSubscription", config);
+        response.success(function(data,status,headers,config){
+            //var r=data;
+            //alert(data.success);
+            if(data.success==false){
+                $scope.errorMessage="Deletion failed, please try it again...";
+            }else if(data.success==true){
+                $scope.errorMessage="Deletion succeeded!";
+            }else{
+                //$scope.errorMessage=data.success;
+                $scope.errorMessage="ERROR";
+            }
+        });
+    };
 });
 

@@ -1,13 +1,18 @@
 <p style="text-align:center">
-    <button class="btn btn-link" ng-click="wannaCreateCustomer=true; wannaSearchCustomer=false; createCustomerWanted()">
+    <button class="btn btn-link" ng-click="wannaCreateCustomer=true; wannaSearchCustomer=false; wannaDeleteCustomer=false; resetMessage(); createCustomerWanted() ">
         <span class="glyphicon glyphicon-pencil"></span> Create Customer
     </button>
-    <button class="btn btn-link" ng-click="wannaSearchCustomer=true; wannaCreateCustomer=false; resetSearchCustomer()">
+    <button class="btn btn-link" ng-click="wannaSearchCustomer=true; wannaCreateCustomer=false; wannaDeleteCustomer=false; resetMessage(); resetSearchCustomer()">
     <span class="glyphicon glyphicon-search"></span> Search Customer
+    </button>
+    <button class="btn btn-link" ng-click="wannaDeleteCustomer=true; wannaCreateCustomer=false; resetMessage(); wannaSearchCustomer=false">
+        <span class="glyphicon glyphicon-search"></span> Delete Customer
     </button>
 </p>
 
 <div ng-show="wannaCreateCustomer" ng-include="'customerCreator.html'"></div>
 
 <div ng-show="wannaSearchCustomer" ng-include="'customerSearcher.html'"></div>
+
+<div ng-show="wannaDeleteCustomer" ng-include="'customerDeleter.html'"></div>
 

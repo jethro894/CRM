@@ -1,14 +1,9 @@
-
 <div>
     <hr>
     <form class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 control-label"> Agent ID: </label>
             <input type="text" ng-model="agentID" readonly>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Customer ID: </label>
-            <input type="text" ng-model="userIDToBeCreated" readonly>
         </div>
 
         <div class="form-group">
@@ -31,24 +26,54 @@
             <input type="text" ng-model="new2.tel" placeholder="tel">
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 1: </label>
+            <input type="text" ng-model="new2.addressLine1" placeholder="address line 1">
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 2: </label>
+            <input type="text" ng-model="new2.addressLine2" placeholder="address line 2">
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">City: </label>
+            <input type="text" ng-model="new2.city" placeholder="city">
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">State: </label>
+            <input type="text" ng-model="new2.state" placeholder="state">
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Country: </label>
+            <input type="text" ng-model="new2.country" placeholder="country">
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Zip Code: </label>
+            <input type="text" ng-model="new2.zipCode" placeholder="zip code">
+        </div>
+
     </form>
     <p style="text-align:center">
-        <button class="btn btn-success" ng-click="updateUser(agentID, userIDToBeCreated, new2)">
-            <span class="glyphicon glyphicon-ok"></span> Submit
+        <button class="btn btn-success" ng-click="createUser(agentID, new2)">
+            <span class="glyphicon glyphicon-ok"></span> Create
         </button>
     </p>
 </div>
 <hr>
-<div ng-show="testCustomer">
+<div ng-show="testCustomer2">
     <h4 style="text-align:center"> Information Submitted!</h4>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>
-                Agent ID
+                Customer ID
             </th>
             <th>
-                Customer ID
+                Agent ID
             </th>
             <th>
                 First Name
@@ -62,16 +87,19 @@
             <th>
                 Telephone
             </th>
+            <th>
+                Address
+            </th>
         </tr>
         </thead>
 
         <tbody>
         <tr>
             <td>
-                {{agentID}}
+                {{userIDToBeCreated}}
             </td>
             <td>
-                {{userIDToBeCreated}}
+                {{agentID}}
             </td>
             <td>
                 {{new2.fName}}
@@ -84,6 +112,9 @@
             </td>
             <td>
                 {{new2.tel}}
+            </td>
+            <td>
+                {{new2.addressLine1 + ", " + new2.addressLine2 + ", " + new2.city + ", " + new2.state + ", " + new2.country + ", " + new2.zipCode }}
             </td>
         </tr>
         </tbody>

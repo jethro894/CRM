@@ -1,4 +1,3 @@
-
 <div ng-init="showAuthenticate=true">
     <br><br><br><br><h1 style="text-align:center">Agent Service</h1>
     <div ng-show="showAuthenticate">
@@ -8,29 +7,233 @@
         </p>
         <p style="text-align:center"><mark>{{error_message}}</mark></p><br>
         <p style="text-align:center">
-            <button class="btn btn-primary btn-lg" ng-click="verify(agentID_to_search);showAuthenticate=false">
+            <button class="btn btn-primary btn-lg" ng-click="verify(agentID_to_search)">
             <span class="glyphicon glyphicon-th-large"></span> Authenticate
             </button>
         </p>
     </div>
     <div>
         <hr>
-        <div style="text-align:center" ng-show="agentVerified">
-            <p><button class="btn btn-info" ng-click="wannaCustomer=true; wannaRecord=false">
+        <div style="text-align:center">
+        <!--<div style="text-align:center" ng-show="agentVerified">-->
+            <p>
+            <button class="btn btn-info" ng-click="wannaCustomer=true; wannaRecord=false; wannaSubscribe=false">
                 <span class="glyphicon glyphicon-user"></span> Customer Management
             </button>
             <br><br><br>
-            <button class="btn btn-info" ng-click="wannaRecord=true; wannaCustomer=false">
+            <button class="btn btn-info" ng-click="wannaRecord=true; wannaCustomer=false; wannaSubscribe=false">
                 <span class="glyphicon glyphicon-th-list"></span> Record Management
-            </button></p>
+            </button>
+            <button class="btn btn-info" ng-click="wannaSubscribe=true; wannaCustomer=false; wannaRecord=false">
+                <span class="glyphicon glyphicon-envelope"></span> Subscription Management
+            </button>
+            </p>
         </div>
         <hr>
         <div ng-show="wannaCustomer" ng-include = "'customerManagement.html'"></div>
         <div ng-show="wannaRecord" ng-include = "'recordManagement.html'"></div>
+        <div ng-show="wannaSubscribe">
+            <p style="text-align:center">
+                <button class="btn btn-link" ng-click="wannaCreateSub=true; wannaSearchSub=false; resetMessage()">
+                    <span class="glyphicon glyphicon-pencil"></span> Create Subscription
+                </button>
+
+                <button class="btn btn-link" ng-click="wannaSearchSub=true; wannaCreateSub=false; resetMessage()">
+                    <span class="glyphicon glyphicon-search"></span> Search Subscription
+                </button>
+            </p>
+            <div ng-show="wannaCreateSub">
+                <!--<p style="text-align:center"><h2></h2></p>-->
+                <div class="container">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Agent ID: </label>
+                            <input type="text" ng-model="newSub.agentID" placeholder="agent ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zip Code: </label>
+                            <input type="text" ng-model="newSub.zipCode" placeholder="zip code">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Notification Type: </label>
+                            <select ng-model="newSub.notificationType" placeholder="notification type">
+                                <option value="email">Email</option>
+                                <option value="sms">SMS</option>
+                            </select>
+                        </div>
+                    </form>
+                    <br>
+                    <p style="text-align: center">
+                        <button class="btn btn-success" ng-click="createSub(newSub);resetMessage()">
+                            <span class="glyphicon glyphicon-ok"></span> Create Subscription
+                        </button>
+                    <p style="text-align: center">{{errorMessage}}</p>
+                    </p>
+                    <hr>
+                    <div ng-show="createSubscriptionShow" class="jumbotron">
+                        <!--<br><h4 style="text-align: center"> Subscription Submitted!</h4>-->
+                        <!--<p>record ID echo: {{records.RecordID}}</p>-->
+                        <!--<p>record timeecho: {{records.RecordTime}}</p>-->
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Subscription ID
+                                </th>
+                                <th>
+                                    Agent ID
+                                </th>
+                                <th>
+                                    Zip Code
+                                </th>
+                                <th>
+                                    Notification Type
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    {{subscriptionID}}
+                                </td>
+                                <td>
+                                    {{newSub.agentID}}
+                                </td>
+                                <td>
+                                    {{newSub.zipCode}}
+                                </td>
+                                <td>
+                                    {{newSub.notificationType}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="wannaSearchSub">
+                <div class="container">
+                    <!--若什么都不填，返回所有的subscription-->
+                    <!--<br><h4 style="text-align: center"> </h4>-->
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subscription ID: </label>
+                            <input type="text" ng-model="newSub2.subscriptionID" placeholder="subscription ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Agent ID: </label>
+                            <input type="text" ng-model="newSub2.agentID" placeholder="agent ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zip Code: </label>
+                            <input type="text" ng-model="newSub2.zipCode" placeholder="zip code">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Notification Type: </label>
+                            <select ng-model="newSub2.notificationType" placeholder="notification type">
+                                <option value="email">Email</option>
+                                <option value="sms">SMS</option>
+                            </select>
+                        </div>
+                    </form>
+                    <p style="text-align: center">
+                        <button class="btn btn-success" ng-click="searchSub(newSub2);resetMessage()">
+                            <span class="glyphicon glyphicon-ok"></span> Search Subscription
+                        </button>
+                    <p style="text-align: center">{{errorMessage}}</p>
+                    </p>
+                </div>
+                <div ng-show="createSubscriptionShow" class="jumbotron">
+                    <!--<br><h4 style="text-align: center"> Subscription Submitted!</h4>-->
+                    <!--<p>record ID echo: {{records.RecordID}}</p>-->
+                    <!--<p>record timeecho: {{records.RecordTime}}</p>-->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                Update
+                            </th>
+                            <th>
+                                Subscription ID
+                            </th>
+                            <th>
+                                Agent ID
+                            </th>
+                            <th>
+                                Zip Code
+                            </th>
+                            <th>
+                                Notification Type
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in subscriptionSet">
+                            <td>
+                                <button class="btn btn-default" ng-click="updateSubPre(x.subscriptionID); updateSubscriptionShow=true; resetMessage()">
+                                    <span class="glyphicon glyphicon-pencil"></span> Update
+                                </button>
+                            </td>
+                            <td>
+                                {{x.subscriptionID}}
+                            </td>
+                            <td>
+                                {{x.agentID}}
+                            </td>
+                            <td>
+                                {{x.zipCode}}
+                            </td>
+                            <td>
+                                {{x.notificationType}}
+                            </td>
+                            <td>
+                                <button class="btn btn-default" ng-click="deleteSub(x.subscriptionID); deleteSubscriptionShow=true; resetMessage()">
+                                    <span class="glyphicon glyphicon-pencil"></span> Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br><br><br>
+                </div>
+                <div ng-show="updateSubscriptionShow">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subscription ID: </label>
+                            <input type="text" ng-model="sIDUpdated" placeholder="subscription ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Agent ID: </label>
+                            <input type="text" ng-model="newSub3.agentID" placeholder="agent ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zip Code: </label>
+                            <input type="text" ng-model="newSub3.zipCode" placeholder="zip code">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Notification Type: </label>
+                            <select ng-model="newSub3.notificationType" placeholder="notification type">
+                                <option value="email">Email</option>
+                                <option value="sms">SMS</option>
+                            </select>
+                        </div>
+                    </form>
+                    <p style="text-align: center">
+                        <button class="btn btn-success" ng-click="updateSub(newSub3); resetMessage()">
+                            <span class="glyphicon glyphicon-ok"></span> Submit
+                        </button>
+                    <p style="text-align: center">{{errorMessage}}</p>
+                    </p>
+                </div>
+                <div ng-show="deleteSubscriptionShow">
+                    <p style="text-align: center">{{errorMessage}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
-    <!--<script src="myApp.js"></script>-->
-    <!--<script src="myController.js"></script>-->
-<!--</body>-->
-<!--</html>-->
 </div>
