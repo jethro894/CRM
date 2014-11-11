@@ -93,10 +93,10 @@ public class SubscriptionVO extends VOBase implements Runnable{
 			return;
 		
 		String[] filter = new String[2];
-		filter[0] = "customer.agentid." + this.topics[0] + ".#";
+		filter[0] = "customer.*.agent." + this.topics[0] + ".#";
 		filter[1] = "#.zipcode." + this.topics[1];
 		try {
-			Receiver r = new Receiver(filter);
+			Receiver r = new Receiver(filter, this);
 			r.run();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -2,6 +2,7 @@ package com.crm.ass3.rmq;
 
 import java.io.IOException;
 
+import com.crm.ass3.subscription.SubscriptionVO;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -14,9 +15,11 @@ public class Receiver implements Runnable{
 	Connection connection;
 	Channel channel;
 	String[] filter;
+	SubscriptionVO subscription;
 	
-	public Receiver(String[] filter) throws IOException {
+	public Receiver(String[] filter, SubscriptionVO subscription) throws IOException {
 		this.filter = filter;
+		this.subscription = subscription;
 	}
 	
 	public void init() throws IOException{
@@ -49,6 +52,8 @@ public class Receiver implements Runnable{
             String routingKey = delivery.getEnvelope().getRoutingKey();
 
             System.out.println(" [x] Received '" + routingKey + "':'" + message + "'");
+            
+            this.subscription.issueSubscription();
         }
 	}
 	
