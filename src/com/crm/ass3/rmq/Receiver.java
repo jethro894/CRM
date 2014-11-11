@@ -9,13 +9,13 @@ import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 
-public class ReceiveTopic implements Runnable{
+public class Receiver implements Runnable{
 	private static final String EXCHANGE_NAME = "topic_logs";
 	Connection connection;
 	Channel channel;
 	String[] filter;
 	
-	public ReceiveTopic(String[] filter) throws IOException {
+	public Receiver(String[] filter) throws IOException {
 		this.filter = filter;
 	}
 	

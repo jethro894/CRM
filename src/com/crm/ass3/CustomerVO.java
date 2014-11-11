@@ -1,6 +1,10 @@
 package com.crm.ass3;
 
+import java.io.IOException;
 import java.util.HashMap;
+
+import com.crm.ass3.rmq.Emitter;
+
 import net.sf.json.JSONObject;
 
 
@@ -66,8 +70,18 @@ public class CustomerVO extends VOBase{
 	
 	//在database中创造一个customer，并且返回success/error
 	public String saveCustomer(){
-		if(CustomerDBAPI.saveCustomer(this))
+		if(CustomerDBAPI.saveCustomer(this)){
+			try {
+				Emitter e = new Emitter();
+				e.publish("customer.create.agent." + this.retrieveAgentID().getID() + ".zipcode." + this.retrieveAddress().Zip, 
+						"Customer " + this.retrieveName().firstname + " " + this.retrieveName().lastname + " created.");
+				e.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			return this.retrieveID().payload;
+		}	
 		else
 			return "null";
 	}
@@ -77,6 +91,15 @@ public class CustomerVO extends VOBase{
 	}
 	
 	public boolean updateSelf(){
+		try {
+			Emitter e = new Emitter();
+			e.publish("customer.update.agent." + this.retrieveAgentID().getID() + ".zipcode." + this.retrieveAddress().Zip, 
+					"Customer " + this.retrieveName().firstname + " " + this.retrieveName().lastname + " updated.");
+			e.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		return CustomerDBAPI.updateCustomer(this);
 	}
 	
@@ -86,6 +109,18 @@ public class CustomerVO extends VOBase{
 	}
 	
 	public static boolean deleteCustomer(String id){
+		CustomerVO tobe_deleted = CustomerDBAPI.retrieveCustomer(id);
+		if(tobe_deleted != null){
+			try {
+				Emitter e = new Emitter();
+				e.publish("customer.delete.agent." + tobe_deleted.retrieveAgentID().getID() + ".zipcode." + tobe_deleted.retrieveAddress().Zip, 
+						"Customer " + tobe_deleted.retrieveName().firstname + " " + tobe_deleted.retrieveName().lastname + " deleted.");
+				e.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		return CustomerDBAPI.deleteCustomer(id);
 	}
 	
@@ -95,10 +130,6 @@ public class CustomerVO extends VOBase{
 		jsonObject.put("customerID", this.retrieveID().getID());
 		//name attribute
 		JSONObject nameObject = new JSONObject();
-		//nameObject.put("firstName", this.retrieveName().firstname);
-		//nameObject.put("middleName", this.retrieveName().middlename);
-		//nameObject.put("lastName", this.retrieveName().lastname);
-		//jsonObject.put("customerName", nameObject);
 		jsonObject.put("firstName",this.retrieveName().firstname);
 		jsonObject.put("lastName",this.retrieveName().lastname);
 		//email attribute
@@ -117,6 +148,5 @@ public class CustomerVO extends VOBase{
 		addressObject.put("ZipCode", this.retrieveAddress().Zip);
 		jsonObject.put("customerAddress", addressObject);
 		return jsonObject;
-		
 	}
 }

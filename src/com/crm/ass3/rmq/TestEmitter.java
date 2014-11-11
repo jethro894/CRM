@@ -13,12 +13,12 @@ public class TestEmitter {
 		// TODO Auto-generated method stub
 		//String[] filter = {"agent.12345", "zipcode.10027"};
 		String[] filter = {"#.agent.12345.#", "#.zipcode.10027"};
-		ReceiveTopic rlt = new ReceiveTopic(filter);
+		Receiver rlt = new Receiver(filter);
 		Thread t = new Thread(rlt);
 		t.start();
 		
 		Thread.sleep(2000);
-		EmitTopic elt = new EmitTopic();
+		Emitter elt = new Emitter();
 		elt.publish("customer.create.agent.123456.zipcode.10025", "customer 1 created!");
 		elt.publish("customer.create.agent.12345.zipcode.10025", "customer 2 created!");
 		elt.publish("customer.create.agent.1234.zipcode.10027", "customer 3 created!");

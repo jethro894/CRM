@@ -6,12 +6,12 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-public class EmitTopic{
+public class Emitter{
 	private static final String EXCHANGE_NAME = "topic_logs";
 	Connection connection;
 	Channel channel;
 	
-	public EmitTopic() throws IOException{
+	public Emitter() throws IOException{
 		this.init();
 	}
 	
