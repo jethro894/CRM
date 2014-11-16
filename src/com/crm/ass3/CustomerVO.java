@@ -129,8 +129,9 @@ public class CustomerVO extends VOBase{
 		jsonObject.put("customerID", this.retrieveID().getID());
 		//name attribute
 		JSONObject nameObject = new JSONObject();
-		jsonObject.put("firstName",this.retrieveName().firstname);
-		jsonObject.put("lastName",this.retrieveName().lastname);
+		nameObject.put("firstName",this.retrieveName().firstname);
+		nameObject.put("lastName",this.retrieveName().lastname);
+		jsonObject.put("customerName", nameObject);
 		//email attribute
 		jsonObject.put("customerEmail", this.retrieveEmail().getEmail());
 		//Phone No
@@ -145,6 +146,7 @@ public class CustomerVO extends VOBase{
 		addressObject.put("Country", this.retrieveAddress().Country);
 		addressObject.put("State", this.retrieveAddress().State);
 		addressObject.put("ZipCode", this.retrieveAddress().Zip);
+		
 		jsonObject.put("customerAddress", addressObject);
 		return jsonObject;
 	}
