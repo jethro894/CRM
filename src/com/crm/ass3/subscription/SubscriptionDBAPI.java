@@ -2,6 +2,8 @@ package com.crm.ass3.subscription;
 
 import java.util.List;
 
+import com.crm.ass3.DBAPI;
+
 public class SubscriptionDBAPI {
 private final static String table = "subscriptions";
 	
@@ -10,8 +12,7 @@ private final static String table = "subscriptions";
 		return null;
 	}
 	
-	public static List<String> lookupSubscription(String customerID, String agentID){
-		String key = customerID + ":" + agentID;
+	public static List<String> lookupSubscription(String key){
 		//return DBAPI.lookup(table, key);
 		return null;
 	}
