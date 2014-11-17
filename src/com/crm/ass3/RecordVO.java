@@ -70,6 +70,14 @@ public class RecordVO extends VOBase{
 		this.initiateTime();//修改时间
 	}
 	
+	public RecordVO(String recordid, String timestamp){
+		this.myFacets = new HashMap<String , VOBase>();
+		IDVO recordID=new IDVO(recordid);
+		this.createFacet(default_facet[5], recordID);
+		TimeVO time = new TimeVO(timestamp);
+		this.createFacet(default_facet[6], time);
+	}
+	
 	//更新record
 	public boolean updateSelf(){
 		return RecordDBAPI.updateRecord(this);

@@ -8,6 +8,10 @@ public class TimeVO extends VOBase{
 		this.payload = c.getTime().toString();
 	}
 	
+	public TimeVO(String timestamp){
+		this.payload = timestamp;
+	}
+	
 	public String getTime(){
 		return this.payload;
 	}
