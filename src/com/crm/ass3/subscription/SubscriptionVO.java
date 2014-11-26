@@ -14,7 +14,7 @@ import com.crm.ass3.rmq.Receiver;
 
 public class SubscriptionVO extends VOBase implements Runnable{
 	protected final String[] default_facet = {"SubscriptionID", "Type", "ContactInformation"};
-	String[] topics;
+	public String[] topics;
 
 	public ContactTypeVO getContactType(){
 		return (ContactTypeVO)this.retrieveFacet(default_facet[1]);
