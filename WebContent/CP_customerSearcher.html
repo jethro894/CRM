@@ -1,0 +1,51 @@
+<h2 style="text-align:center">Search Customer</h2><br>
+
+<div class="form group">
+    <input type="text" style="width:400px;margin:0 auto;"  class="form-control" ng-model="CP_id_to_search"  placeholder="Please enter your customer ID here..."><br><br>
+</div>
+
+<p style="text-align:center">
+    <button class="btn btn-info btn-lg" ng-click="userSearchUser(CP_id_to_search); searchComplete=true">
+        <span class="glyphicon glyphicon-search"></span> Search!
+    </button>
+
+	{{users}}
+    <div ng-show="errorShow">
+        {{errorMessage}}
+    </div>
+
+<hr>
+<div ng-show="userSearchComplete">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Customer ID</th>
+            <th>Agent ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <button class="btn btn-link" ng-click="userUpdateUserWanted(users.customerID, users.agentID)">
+                    <span class="glyphicon glyphicon-pencil"></span>Update
+                </button>
+            </td>
+            <td>{{ users.customerID }}</td>
+            <td>{{ users.agentID }}</td>
+            <td>{{ users.firstName }}</td>
+            <td>{{ users.lastName }}</td>
+            <td>{{ users.customerEmail }}</td>
+            <td>{{ users.customerPhone }}</td>
+            <td>{{ users.customerAddress.AddressLine1 + ", " + users.customerAddress.AddressLine2 + ", " + users.customerAddress.City + ", " + users.customerAddress.State + ", " + users.customerAddress.Country + ", " + users.customerAddress.ZipCode}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-show="u2uUpdateShow" ng-include="'CP_customerUpdater.html'"></div>

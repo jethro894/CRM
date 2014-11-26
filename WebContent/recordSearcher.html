@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="jumbotron">
+    <br><h4 style="text-align:center">Search Record</h4>
+    <p style="text-align:center">
+        <input type="text" ng-model="record_id_to_search" size="40" placeholder="Please enter record ID here..."><br><br>
+        <button class="btn btn-default" ng-click="searchRecord(record_id_to_search)">
+            <span class="glyphicon glyphicon-th-list"></span> Search!
+        </button>
+        {{errorMessage}}
+    </p><hr></div>
+
+</div>
+<div ng-show="searchRecordComplete" class="container">
+	<p>records echo: {{records}}</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Record ID</th>
+            <th>Record Time</th>
+            <th>Customer ID</th>
+            <th>Contact Data</th>
+            <th>Contact Type</th>
+            <th>Text Summary</th>
+        </tr>
+        </thead>
+        <tbody>
+       <!--<tr ng-repeat="x in records">-->
+       <tr>
+            <td>
+                <button class="btn" ng-click="updateRecordWanted(records.RecordID)">
+                    <span class="glyphicon glyphicon-pencil"></span> Update
+                </button>
+            </td>
+            <td>{{ records.RecordID }}</td>
+            <td>{{ records.RecordTime }}</td>
+            <td>{{ records.customerID }}</td>
+            <td>{{ records.contactData }}</td>
+            <td>{{ records.contactType }}</td>
+            <td>{{ records.TextSummary}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-show="updateRecordShow" ng-include="'recordUpdater.html'"></div>

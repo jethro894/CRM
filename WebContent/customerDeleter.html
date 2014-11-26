@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="jumbotron">
+        <br><h4 style="text-align:center">Delete Customer</h4>
+        <p style="text-align:center">
+            <input type="text" ng-model="customer_id_to_search" size="40" placeholder="Please enter customer ID here..."><br><br>
+            <button class="btn btn-default" ng-click="deleteCustomer(customer_id_to_search)">
+                <span class="glyphicon glyphicon-th-list"></span> delete
+            </button>
+            <p style="text-align:center">{{errorMessage}}</p>
+        </p><hr></div>
+</div>
