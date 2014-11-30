@@ -9,8 +9,8 @@
     <servlet-name>JAX-RS Servlet</servlet-name>
     <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
     <init-param>
-    	<param-name>javax.ws.rs.Application</param-name>
-    	<param-value>servlet.App</param-value>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>servlet.App</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
