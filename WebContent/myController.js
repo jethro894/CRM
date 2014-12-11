@@ -19,7 +19,7 @@ app.controller("myController", function($scope,$http){
     $scope.userSearchUser=function(user_id){
     	//$scope.users={};
         var config={params:{userID:user_id}};
-        var response=$http.get('/CRM/Customer/RetrieveCustomer', config);
+        var response=$http.get('/New/CRM/Customer/RetrieveCustomer', config);
         response.success(function(data,statuc,headers,config){
         	$scope.users=data;
             if(data.customerID==null){
@@ -58,7 +58,7 @@ app.controller("myController", function($scope,$http){
         $scope.data1.zipCode=attribute.zipCode;
         $scope.data1.loginAgentID="";
         var data=$scope.data1;
-        var response=$http.post("/CRM/Customer/UpdateCustomer",data);
+        var response=$http.post("/New/CRM/Customer/UpdateCustomer",data);
         response.success(function(data, status, headers, config) {
             if(data.success==true){
                 $scope.Message="Update succeeded!";
@@ -73,7 +73,7 @@ app.controller("myController", function($scope,$http){
     $scope.verify = function(agent_id){
         $scope.agentID = agent_id;
         var config={params:{agentID:$scope.agentID}};
-        var response=$http.get('/CRM/Agent/AgentLogin',config);
+        var response=$http.get('/New/CRM/Agent/AgentLogin',config);
         response.success(function(data, status, headers, config) {
         	var ifexist=data;
             if(ifexist.success){$scope.error_message = "";}
@@ -121,7 +121,7 @@ app.controller("myController", function($scope,$http){
         $scope.recordInfo.contactData=attributes.contactData;
         $scope.recordInfo.TextSummary=attributes.TextSummary;
         var data = $scope.recordInfo;
-        var response=$http.post("/CRM/Agent/CreateRecord",data);
+        var response=$http.post("/New/CRM/Agent/CreateRecord",data);
         response.success(function(data, status, headers, config) {
         	$scope.records=data;
             if(data.RecordID==null){
@@ -140,7 +140,7 @@ app.controller("myController", function($scope,$http){
         $scope.errorMessage="";
         $scope.recordIDToBeSearched=record_id;
         var config={params:{recordID:record_id}};
-        var response=$http.get("/CRM/Agent/RetrieveRecord", config);
+        var response=$http.get("/New/CRM/Agent/RetrieveRecord", config);
         response.success(function(data,status,headers,config){
             if(data.RecordID==null){
                 $scope.searchRecordComplete=false;
@@ -167,7 +167,7 @@ app.controller("myController", function($scope,$http){
         $scope.recordInfo.contactData=attributes.contactData;
         $scope.recordInfo.TextSummary=attributes.TextSummary;
         var data=$scope.recordInfo;
-        var response=$http.post("/CRM/Agent/UpdateRecord",data);
+        var response=$http.post("/New/CRM/Agent/UpdateRecord",data);
         response.success(function(data, status, headers, config) {
         	$scope.myRecord=data;
             if(data.RecordID==null){
@@ -182,7 +182,7 @@ app.controller("myController", function($scope,$http){
     $scope.deleteRecord=function(record_id){
         $scope.errorMessage="";
         var config={params:{recordID:record_id}};
-        var response=$http.get("/CRM/Agent/DeleteRecord", config);
+        var response=$http.get("/New/CRM/Agent/DeleteRecord", config);
         response.success(function(data,status,headers,config){
             var r=data;
         	if(r.success==false){
@@ -216,7 +216,7 @@ app.controller("myController", function($scope,$http){
         $scope.userIDToBeSearched = user_id;
         var config={params:{userID:user_id}};
         //var data=user_id;
-        var response=$http.get("/CRM/Agent/RetrieveCustomer",config);
+        var response=$http.get("/New/CRM/Agent/RetrieveCustomer",config);
         //var response=$http.post("CRM/Agent/RetrieveCustomer",data);
         //alert("test1");
         response.success(function(data,status,headers,config){
@@ -240,7 +240,7 @@ app.controller("myController", function($scope,$http){
     	$scope.userInfo.page=page;*/
     	//var data=$scope.userInfo;
     	var config={params:{query:attribute, limit:$scope.pageLimit, page:$scope.pageIndex}};
-    	var response=$http.get("/CRM/Agent/SearchCustomerByAnyQ",config);
+    	var response=$http.get("/New/CRM/Agent/SearchCustomerByAnyQ",config);
         response.success(function(data,status,headers,config){
         	//alert("test!");
         	$scope.users=data;	
@@ -306,7 +306,7 @@ app.controller("myController", function($scope,$http){
         $scope.newCustomerInfo.country=attributes.country;
         $scope.newCustomerInfo.zipCode=attributes.zipCode;
         var data=$scope.newCustomerInfo;
-        var response=$http.post("/CRM/Agent/UpdateCustomer",data);
+        var response=$http.post("/New/CRM/Agent/UpdateCustomer",data);
         response.success(function(data,status,headers,config){
            if(data.success==true){
                $scope.errorMessage3="";
@@ -336,7 +336,7 @@ app.controller("myController", function($scope,$http){
         $scope.customerInfo.country=attributes.country;
         $scope.customerInfo.zipCode=attributes.zipCode;
         var data=$scope.customerInfo;
-        var response=$http.post("/CRM/Agent/CreateCustomer",data);
+        var response=$http.post("/New/CRM/Agent/CreateCustomer",data);
         response.success(function(data, status, headers, config) {
             $scope.userIDToBeCreated=data;
             if(data.customerID=null){
@@ -350,7 +350,7 @@ app.controller("myController", function($scope,$http){
     $scope.deleteCustomer=function(user_id){
         $scope.errorMessage="";
         var config={params:{userID:user_id}};
-        var response=$http.get("/CRM/Agent/DeleteCustomer", config);
+        var response=$http.get("/New/CRM/Agent/DeleteCustomer", config);
         response.success(function(data,status,headers,config){
         	var r=data;
         	alert(data.success);
